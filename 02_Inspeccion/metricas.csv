@@ -1,0 +1,38 @@
+Metricas de la inspeccion Fagan - ERS SIGA v1.0;;;
+Documento;ERS_SIGA_v1.0.pdf;Paginas efectivas;122
+Defectos unicos consolidados;29;Fecha;2026-08-09
+;;;
+M1 - DENSIDAD DE DEFECTOS;;;
+Metrica;Formula;Valor;Interpretacion
+Densidad global;29 defectos / 122 paginas;0,238 def/pag;Un defecto cada 4,2 paginas. El ERS no esta improvisado - un documento sin control de calidad supera habitualmente 1 def/pag - pero la densidad se concentra en las zonas de integracion (anexos, matriz, seccion V) y no en las fichas de requisitos, que son la parte mas solida.
+Densidad de criticos y mayores;23 defectos / 122 paginas;0,189 def/pag;El 79 por ciento de los hallazgos compromete la validez del artefacto. La calidad no falla por redaccion sino por coherencia entre partes.
+;;;
+M2 - DISTRIBUCION POR TIPO (ISO/IEC/IEEE 29148:2018);;;
+Tipo;Cantidad;Porcentaje;Interpretacion
+Consistencia;10;34,5%;Tipo dominante. El ERS afirma cosas distintas sobre el mismo objeto en secciones distintas (alcance del MVP, estado del cronograma, actor de EV-02, prioridad de RF-24/25). Es el patron tipico de un documento crecido por acumulacion de entregas sin pase de integracion final.
+Trazabilidad;7;24,1%;Segundo tipo. Los enlaces existen pero no resuelven: tablas mal numeradas, matriz con identificadores inexistentes, evidencias sin requisito destino.
+Completitud;4;13,8%;Huecos localizados y de alto impacto - una seccion vacia y una obligacion legal sin requisito.
+Verificabilidad;4;13,8%;Concentrada en los datos derivados (Kano, WSJF) y en los criterios de aceptacion, no en los criterios de verificacion de los RF, que si estan cuantificados.
+Ambiguedad;2;6,9%;El valor mas bajo. Confirma que la redaccion de requisitos del equipo FGMMN es precisa; el problema no es como se escribe cada requisito sino como se conectan entre si.
+Factibilidad;2;6,9%;Pocos pero graves - incluyen la suposicion de conectividad refutada por la propia evidencia de campo.
+;;;
+M3 - DISTRIBUCION POR SEVERIDAD;;;
+Severidad;Cantidad;Porcentaje;Interpretacion
+Critico;4;13,8%;Cuatro defectos invalidan una conclusion del documento - la seccion de declaracion de IA vacia, la matriz que cita requisitos inexistentes, la base legal de la Categoria B sin requisito que la sustente y la suposicion de conectividad refutada. Ninguno se corrige con redaccion; todos exigen decision de gestion.
+Mayor;19;65,5%;Bloque dominante. Son incoherencias entre partes que un lector externo detecta y que impiden usar el ERS como contrato.
+Menor;6;20,7%;Erratas de forma y nomenclatura sin efecto sobre la interpretacion de ningun requisito.
+;;;
+M4 - TASA DE DETECCION POR INSPECTOR;;;
+Inspector / pase;Defectos unicos aportados;Porcentaje del total;Interpretacion
+Chavarria - pase I1;11;37,9%;Alcance de 58 paginas (secciones I-III, 3.6, 5.3, IX). Rendimiento 0,19 def/pag.
+Chavarria - pase I2;11;37,9%;Alcance de 45 paginas (2.5-2.6, 3.3, 3.5, IV, V, VII, matriz CSV). Rendimiento 0,24 def/pag - el pase mas productivo por pagina, porque cubrio la zona de integracion.
+Munoz - pase de la Moderadora;7;24,1%;Alcance de 19 paginas (MVP, conclusiones, anexos, coherencia con el repositorio). Rendimiento 0,37 def/pag - el mas alto, resultado de contrastar el ERS contra artefactos externos y no solo contra si mismo.
+Solapamiento entre pases;6 duplicados fusionados;20,7% de las observaciones brutas;Un solapamiento del 21 por ciento indica que los alcances estuvieron bien repartidos - un solapamiento nulo habria delatado que nadie reviso fuera de su zona, y uno alto que la division no funciono.
+;;;
+M5 - ESFUERZO TOTAL EN HORAS-PERSONA;;;
+Actividad;Horas-persona;Detalle;Interpretacion
+Preparacion individual;7,0;I1 2,5 + I2 2,5 + Mod 2,0;El 70 por ciento del esfuerzo esta antes de la reunion. Es el reparto que predice Fagan (1976) - la reunion consolida, no descubre.
+Reunion de inspeccion;3,0;85 min x 2 asistentes = 2,83 h redondeado a 3,0;Dentro del limite de 90 min.
+Total inspeccion;10,0;;
+Eficiencia de deteccion;2,9 def/h-persona;29 defectos / 10,0 h-persona;Cada hora-persona invertida en inspeccion identifico casi 3 defectos. Detectarlos aqui cuesta ordenes de magnitud menos que detectarlos en implementacion o despues del despliegue.
+Tasa de correccion;100% de criticos y mayores;23 de 23 corregidos;Los 6 menores se documentan sin corregir con justificacion registrada.

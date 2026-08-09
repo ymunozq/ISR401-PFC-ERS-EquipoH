@@ -1,0 +1,16 @@
+Registro de horas de preparacion individual - Inspeccion Fagan Equipo H;;;;;
+Integrante;Rol;Fecha;Horario;Horas;Defectos registrados antes de la reunion
+Chavarria Cuenca Tahiny Mel;Inspector 1 (pase I1);2026-08-08;19:10-21:40;2,5;11
+Chavarria Cuenca Tahiny Mel;Inspector 2 (pase I2);2026-08-09;08:00-10:30;2,5;12
+Munoz Quinonez Yeranick Esther;Moderadora (pase de revision);2026-08-09;10:45-12:45;2,0;12
+;;;;;
+Subtotal preparacion;;;;7,0;35 observaciones brutas
+Reunion de inspeccion;Ambas integrantes;2026-08-09;15:00-16:25;3,0;29 defectos unicos consolidados
+Correccion y elaboracion del delta v1.1;Ambas integrantes;2026-08-09;16:30-17:00 y 19:00-20:00;2,5;23 correcciones documentadas
+Reunion del CCB;Ambas integrantes;2026-08-09;17:00-18:30;3,0;3 RFC deliberadas
+Trazabilidad en herramienta CASE;Ambas integrantes;2026-08-09;20:00-21:30;3,0;Tablero, campos personalizados y matriz
+Linea base con Git;Ambas integrantes;2026-08-09;21:30-22:15;1,5;Commits, tag y CHANGELOG
+Comparativa CASE y conclusiones;Ambas integrantes;2026-08-09;22:15-23:00;1,5;Cuadro comparativo y 5 conclusiones
+Redaccion e integracion del informe;Ambas integrantes;2026-08-09;23:00-00:30;3,0;Informe PE4 en LaTeX
+;;;;;
+TOTAL PRACTICA;;;;24,5 horas-persona;Equivalente a 8 horas de duracion por 2 integrantes mas el sobreesfuerzo derivado de cubrir 4 roles con 2 personas
