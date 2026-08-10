@@ -105,15 +105,6 @@ Las tres pasadas de `pdflatex` son necesarias: la primera genera los auxiliares,
 
 **Nota sobre las figuras.** Los gráficos de las métricas M2 y M3 se dibujan con TikZ dentro del propio `.tex`; no dependen de archivos de imagen externos, de modo que el PDF se reproduce por clonación del repositorio sin ningún recurso adicional.
 
-## Pendientes antes de la entrega al SGA
-
-- [x] Crear el repositorio remoto público y publicarlo: https://github.com/ymunozq/ISR401-PFC-ERS-EquipoH — `main` y el *tag* `baseline-v1.1` ya están en GitHub.
-- [ ] **Recompilar `PE4_U4_MUNOZ_CHAVARRIA.pdf`** — el `.tex` se corrigió después de generar el PDF actual (conteo de *commits* en la sección de línea base); el PDF del repositorio está desactualizado en ese detalle hasta la próxima compilación.
-- [ ] Construir el tablero en Trello a partir de `04_Trazabilidad/backlog_export.csv` y tomar las capturas listadas en `04_Trazabilidad/capturas/LEEME_CAPTURAS.md`.
-- [ ] Tomar las capturas de Git listadas en `06_Evidencias/capturas_git/LEEME_CAPTURAS_GIT.md` (ahora con el historial ya publicado).
-- [ ] Tomar las fotografías de sesión listadas en `06_Evidencias/fotos_sesion/LEEME_FOTOS.md`.
-- [ ] Firmar los tres Anexos A, el acta de inspección, el acta del CCB y la declaración de IA.
-- [ ] Subir `PE4_U4_MUNOZ_CHAVARRIA.pdf` (recompilado) al SGA en la Semana 14.
 
 ## Referentes
 
