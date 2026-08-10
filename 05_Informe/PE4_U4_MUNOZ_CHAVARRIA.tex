@@ -1,0 +1,630 @@
+%======================================================================
+%  PE4 - Practica Experimental Unidad IV - ISR-401
+%  Validacion, Gestion de Requisitos y Herramientas CASE
+%  Equipo H - Munoz Quinonez Yeranick Esther / Chavarria Cuenca Tahiny Mel
+%
+%  COMPILACION (ver README.md del repositorio):
+%    pdflatex PE4_U4_MUNOZ_CHAVARRIA.tex
+%    bibtex   PE4_U4_MUNOZ_CHAVARRIA
+%    pdflatex PE4_U4_MUNOZ_CHAVARRIA.tex
+%    pdflatex PE4_U4_MUNOZ_CHAVARRIA.tex
+%======================================================================
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{lastpage}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+
+%----------------------------------------------------------------------
+% UNICO lugar donde se declara la URL del repositorio y la version.
+%----------------------------------------------------------------------
+\newcommand{\repourl}{https://github.com/ymunozq/ISR401-PFC-ERS-EquipoH}
+\newcommand{\versionbase}{v1.1}
+
+\definecolor{uteqverde}{HTML}{1D6B36}
+\definecolor{gris}{HTML}{EFEFEF}
+\definecolor{ambar}{HTML}{B26B00}
+\definecolor{rojo}{HTML}{9C2A2A}
+\definecolor{azul}{HTML}{1F4E79}
+
+\titleformat{\section}{\normalfont\bfseries\large\color{uteqverde}}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\normalfont\bfseries\normalsize}{\thesubsection}{0.6em}{}
+\setlength{\parskip}{4pt}
+\linespread{1.15}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize Ingeniería de Requisitos (ISR-401)}
+\fancyhead[R]{\footnotesize PE4 --- Equipo H --- UTEQ 2026--2027 PPA}
+\fancyfoot[C]{\footnotesize Página \thepage\ de \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newcommand{\thead}[1]{\cellcolor{uteqverde}\textcolor{white}{\textbf{#1}}}
+
+\begin{document}
+
+%======================================================================
+\begin{titlepage}
+\centering
+\vspace*{6mm}
+{\bfseries\Large UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO\par}
+\vspace{2mm}
+{\bfseries\large FACULTAD DE CIENCIAS DE LA COMPUTACIÓN\par}
+{\bfseries\large CARRERA DE SOFTWARE (REDISEÑO)\par}
+\vspace{12mm}
+{\color{uteqverde}\rule{\textwidth}{1.2pt}}
+\vspace{4mm}
+
+{\bfseries\LARGE Práctica Experimental PE4 --- Unidad IV\par}
+\vspace{3mm}
+{\large Validación, Gestión de Requisitos y Herramientas CASE\par}
+\vspace{2mm}
+{\normalsize Inspección Fagan $\cdot$ Change Control Board $\cdot$ Trazabilidad en herramienta CASE $\cdot$ Línea base con Git\par}
+\vspace{4mm}
+{\color{uteqverde}\rule{\textwidth}{1.2pt}}
+\vspace{10mm}
+
+{\bfseries SISTEMA DEL PROYECTO FIN DE CURSO:\par}
+\vspace{1mm}
+{\large SIGA --- Sistema Inteligente de Gestión de Aulas\par}
+{\small Equipo FGMMN --- ERS/SRS Entrega 2A, versión inspeccionada v1.0\par}
+\vspace{8mm}
+
+{\bfseries EQUIPO H --- INTEGRANTES Y ROLES:\par}
+\vspace{2mm}
+\begin{tabular}{@{}ll@{}}
+\textbf{Muñoz Quiñonez Yeranick Esther} & C.I. 1207929645 --- ymunozq@uteq.edu.ec \\
+\multicolumn{2}{@{}l@{}}{\quad Moderadora de la inspección $\cdot$ Presidenta y Analista del CCB} \\[2mm]
+\textbf{Chavarria Cuenca Tahiny Mel} & C.I. 0943050054 --- tchavarriac@uteq.edu.ec \\
+\multicolumn{2}{@{}l@{}}{\quad Lectora $\cdot$ Inspectora 1 $\cdot$ Inspectora 2 $\cdot$ Representante del cliente y Desarrolladora del CCB} \\
+\end{tabular}
+\vspace{6mm}
+
+{\small \textbf{Integrante titular del PFC:} Muñoz Quiñonez Yeranick Esther es integrante del equipo FGMMN, autor del ERS inspeccionado, en el que desempeña el rol de Documentadora.\par}
+\vspace{8mm}
+
+{\bfseries DOCENTE:\par} Ing. Gleiston Cicerón Guerrero Ulloa, PhD
+\vspace{4mm}
+
+{\bfseries ASIGNATURA:\par} Ingeniería de Requerimientos --- 4.\textsuperscript{o} nivel
+\vspace{10mm}
+
+{\color{uteqverde}\rule{\textwidth}{0.8pt}}\\[2mm]
+{\bfseries URL DEL REPOSITORIO:}\\[1mm]
+{\ttfamily \repourl}\\[2mm]
+{\color{uteqverde}\rule{\textwidth}{0.8pt}}
+\vspace{8mm}
+
+{\bfseries Versión de la línea base: \versionbase\ \quad$\cdot$\quad Fecha: 9 de agosto de 2026\par}
+\vspace{4mm}
+{\bfseries QUEVEDO --- LOS RÍOS --- ECUADOR\par}
+{\bfseries 2026 --- 2027 PPA\par}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+%======================================================================
+\section{Resumen y objetivos}
+
+\subsection*{Resumen}
+Este informe documenta la ejecución de una inspección formal tipo Fagan sobre el ERS del sistema SIGA (Entrega 2A, 122 páginas), la gestión de tres solicitudes de cambio mediante un Change Control Board simulado, la construcción de la trazabilidad bidireccional en una herramienta CASE y el establecimiento de la línea base \versionbase\ con control de versiones. La inspección consolidó \textbf{29 defectos únicos} (4 críticos, 19 mayores, 6 menores) con una densidad de 0,238 defectos por página y un esfuerzo de 10,0 horas-persona. El tipo dominante fue la \emph{consistencia} (34,5\,\%), lo que caracteriza a un documento crecido por acumulación de entregas sin un pase de integración final, y no un documento mal redactado. Se corrigió el 100\,\% de los defectos críticos y mayores. Las tres RFC elevadas al CCB proceden de defectos reales de esta inspección y no de escenarios hipotéticos. El informe cierra con una comparativa de cinco herramientas CASE, el contraste entre IR tradicional e IR ágil y cinco conclusiones críticas derivadas de los resultados propios del equipo.
+
+\subsection*{Objetivo general}
+Aplicar técnicas formales de validación de requisitos, gestionar cambios mediante un CCB simulado, implementar la trazabilidad del ERS en una herramienta CASE y establecer una línea base con Git sobre el ERS real del Proyecto Fin de Curso.
+
+\subsection*{Objetivos específicos}
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+\item Ejecutar una inspección Fagan sobre el ERS del PFC con roles diferenciados, lista de verificación y registro estructurado de defectos.
+\item Calcular e interpretar las cinco métricas de inspección exigidas.
+\item Tramitar tres RFC de naturaleza distinta con análisis de impacto derivado de la matriz de trazabilidad.
+\item Deliberar y decidir en un CCB simulado, con acta motivada y versión actualizada del ERS.
+\item Construir la trazabilidad bidireccional en una herramienta CASE con campos personalizados y enlaces verificables.
+\item Establecer y publicar la línea base del ERS con \emph{commit} semántico, \emph{tag} anotado y \texttt{CHANGELOG.md}.
+\item Comparar herramientas CASE y contrastar IR tradicional frente a IR ágil, cerrando con conclusiones críticas propias.
+\end{enumerate}
+
+%======================================================================
+\section{Fundamento teórico}
+
+\subsection{Marco normativo}
+La validación de requisitos se ubica en ISO/IEC/IEEE 29148:2018 \S6.4, que define el proceso de \emph{Requirements Validation} como la confirmación de que los requisitos definen el sistema que el usuario realmente necesita, distinguiéndolo del proceso de verificación de requisitos que comprueba su corrección formal \cite{iso29148}. El control de cambios pertenece al proceso de gestión de la configuración, especificado en ISO/IEC/IEEE 15288:2023 \S6.3.5 para sistemas y en ISO/IEC/IEEE 12207:2017 para software \cite{iso15288,iso12207}; ambos exigen que todo elemento de configuración tenga una línea base identificada y que los cambios sobre ella se autoricen formalmente.
+
+El modelo de calidad de ISO/IEC 25010:2023 aplicado al ERS define nueve características de producto \cite{iso25010}. Su aplicación al caso inspeccionado resultó ilustrativa: el ERS de SIGA declara cubrir las nueve, pero rotula \emph{Portabilidad} como característica de primer nivel cuando en la revisión de 2023 es subcaracterística de \emph{Flexibilidad}, y omite \emph{Inocuidad}. La observación se registró en el Anexo A del pase I2 y se trasladó a la RFC-02 en lugar de abrirse como defecto independiente, por afectar al mapeo de calidad y no al enunciado de ningún requisito.
+
+SWEBOK v4.0 \S1.6--1.8 sitúa la validación, la gestión de requisitos y las herramientas de IR como áreas separadas del cuerpo de conocimiento, subrayando que la trazabilidad es un atributo del proceso y no un artefacto que se produzca al final \cite{swebok2024}. Pohl, en la Parte V de su tratado, organiza la gestión de requisitos en torno a atributos, vistas, priorización, trazabilidad y gestión del cambio \cite{pohl2025}. El CCB, en la 7.\textsuperscript{a} edición del PMBOK, es el grupo formalmente constituido responsable de revisar, evaluar, aprobar, aplazar o rechazar los cambios del proyecto, y de comunicar las decisiones \cite{pmbok2021}.
+
+\subsection{Validación de requisitos}
+\textbf{Verificación} responde a «¿estamos construyendo el producto correctamente?» y \textbf{validación} a «¿estamos construyendo el producto correcto?» \cite{iso29148}. La distinción no es retórica: el defecto D-04 de esta inspección es un fallo de validación puro. El requisito SUP-01 estaba correctamente redactado, era claro y no ambiguo --- y afirmaba algo que la evidencia de campo del propio equipo (EV-15) ya había refutado. Ninguna revisión de verificación lo habría detectado.
+
+El IREB CPRE FL v3.1 formula tres principios de validación: participación de las perspectivas correctas, separación entre detección y corrección de errores, y validación desde varias perspectivas \cite{ireb2022}. Las técnicas habituales se ordenan por formalidad creciente: revisión informal, \emph{walkthrough}, inspección Fagan, prototipado, listas de verificación y validación por perspectivas \cite{pohl2025,wiegers2013}.
+
+El método Fagan define seis fases --- planificación, visión general, preparación individual, reunión de inspección, retrabajo y seguimiento --- y cuatro roles: moderador, lector, inspectores y autor \cite{fagan1976}. Su regla central es que la reunión detecta y no corrige, porque discutir soluciones consume el tiempo de detección y sesga la búsqueda hacia lo que ya se sabe arreglar. En esta práctica la regla se aplicó de forma verificable: el acta registra dos interrupciones de la Moderadora ante intentos de proponer solución (\S4.4). Fagan reporta densidades de 10 a 20 defectos por cada mil líneas y una eficiencia de detección superior al 60\,\% de los defectos totales del artefacto; el caso de estudio original del método sobre módulos de sistemas operativos de IBM mostró que el coste de corregir un defecto detectado en inspección es entre 10 y 100 veces menor que el de corregirlo en producción \cite{fagan1976}.
+
+Las métricas clásicas de inspección son la densidad de defectos, la distribución por tipo y por severidad, la tasa de detección por inspector y el esfuerzo en horas-persona. La interpretación importa más que el valor: una densidad baja puede significar un documento maduro o una inspección superficial, y solo el cruce con el esfuerzo invertido y la distribución por tipo permite distinguirlos.
+
+\subsection{Gestión de requisitos}
+La gestión de la configuración del ERS exige identificar el documento como elemento de configuración, congelar líneas base y controlar los cambios sobre ellas \cite{iso12207}. Los atributos de requisito recomendados por Pohl y por Wiegers incluyen identificador, versión, prioridad, fuente, responsable, estado y criterio de aceptación \cite{pohl2025,wiegers2013}.
+
+Gotel y Finkelstein formularon la distinción hoy canónica entre \emph{pre-traceability} --- el enlace del requisito hacia atrás, hacia el \emph{stakeholder}, la evidencia o el documento que lo originó --- y \emph{post-traceability} --- el enlace hacia adelante, hacia el caso de uso, el módulo, el diseño y la prueba \cite{gotel1994}. Su tesis central es que el «problema de la trazabilidad» no es de herramientas sino de que la información de origen no se captura en el momento en que existe. El defecto D-15 de esta inspección lo ilustra literalmente: el catálogo de evidencias de SIGA registra ocho necesidades de la segunda ronda de campo marcadas como «candidato», es decir, capturó el origen y nunca cerró el enlace hacia adelante. Cleland-Huang, Gotel y Zisman sistematizan la trazabilidad como práctica de ingeniería con estrategias de creación, mantenimiento y uso \cite{clelandhuang2012}.
+
+El proceso de cambio comprende cinco pasos: solicitud formal (RFC), análisis de impacto, decisión del CCB, implementación y cierre \cite{pmbok2021,wiegers2013}. El análisis de impacto debe recorrer la matriz de trazabilidad, distinguiendo artefactos directos e indirectos; estimarlo «a ojo» es el error más frecuente. La volatilidad de requisitos se mide como el número de cambios por requisito y por unidad de tiempo, y es un indicador temprano de alcance mal delimitado.
+
+\subsection{Herramientas CASE para IR}
+Las herramientas CASE se clasifican en \emph{upper CASE} (apoyo a análisis y especificación), \emph{lower CASE} (apoyo a implementación y pruebas) e \emph{integrated CASE} o I-CASE, que cubren el ciclo completo \cite{swebok2024}. En gestión de requisitos, las funcionalidades esperables son repositorio central con identificador único, atributos configurables, trazabilidad bidireccional navegable, \emph{baselining} y comparación entre líneas base, control de cambios con flujo de aprobación, colaboración con comentarios y notificaciones, e integración con el sistema de control de versiones \cite{pohl2025,wiegers2013}.
+
+Los criterios de selección relevantes para un equipo académico son distintos de los de una organización certificada: pesan más el coste, la curva de aprendizaje y la trazabilidad verificable por un tercero que la conformidad con normas de sectores regulados. La limitación estructural de las herramientas de gestión de tareas usadas como herramientas de IR --- el caso de Trello --- es que no distinguen nativamente entre un requisito y una tarea, de modo que la trazabilidad debe emularse con campos personalizados y convenciones de etiquetado, sin validación automática de la integridad de los enlaces.
+
+\subsection{IR en procesos ágiles}
+En procesos ágiles el \emph{product backlog} sustituye al documento de requisitos como artefacto vivo, y la unidad de especificación es la historia de usuario en formato Connextra: «Como \(\langle\)rol\(\rangle\), quiero \(\langle\)funcionalidad\(\rangle\), para \(\langle\)beneficio\(\rangle\)» \cite{cohn2004}. Cohn advierte expresamente que la cláusula de beneficio es la que aporta valor a la historia y que repetir en ella la funcionalidad la vacía de sentido. El defecto D-10 de esta inspección es exactamente ese caso, replicado 17 veces: las historias de SIGA repiten la descripción del requisito en la cláusula «para».
+
+El \emph{grooming} o refinamiento del backlog es la actividad continua de análisis; la \emph{Definition of Ready} y la \emph{Definition of Done} operan como criterios de entrada y salida. El BDD y el formato Gherkin --- Dado / Cuando / Entonces --- convierten el criterio de aceptación en una especificación ejecutable \cite{smart2014}. Smart insiste en que la cláusula «Entonces» debe expresar un resultado observable y no un procedimiento de prueba; los 17 escenarios de SIGA colocan un procedimiento en esa cláusula, lo que los hace no ejecutables. La trazabilidad ágil se sostiene con enlaces épica--historia--tarea y con la vinculación de los \emph{commits} a los identificadores de historia.
+
+%======================================================================
+\section{Inspección formal del ERS (método Fagan)}
+
+\subsection{Planificación y roles}
+La inspección se ejecutó el 9 de agosto de 2026 sobre el artefacto \texttt{ERS\_SIGA\_v1.0.pdf}, correspondiente al ERS/SRS de la Entrega 2A del sistema SIGA, obtenido del repositorio público del PFC en el \emph{commit} \texttt{bb04d43}. El documento tiene 122 páginas efectivas (121 numeradas más la portada) y 2\,256 líneas de fuente \LaTeX.
+
+\begin{center}
+\small
+\begin{tabular}{|p{2.4cm}|p{5.4cm}|p{6.6cm}|}
+\hline
+\thead{Rol} & \thead{Función} & \thead{Integrante} \\ \hline
+Moderadora & Conduce, cronometra, impide la discusión de soluciones y consolida el Anexo B & Muñoz Quiñonez Yeranick Esther --- C.I. 1207929645 \\ \hline
+Lectora & Parafrasea el ERS sección por sección & Chavarria Cuenca Tahiny Mel --- C.I. 0943050054 \\ \hline
+Inspectora 1 & Pase independiente I1 con Anexo A propio & Chavarria Cuenca Tahiny Mel --- C.I. 0943050054 \\ \hline
+Inspectora 2 & Pase independiente I2 con Anexo A propio & Chavarria Cuenca Tahiny Mel --- C.I. 0943050054 \\ \hline
+\end{tabular}
+\end{center}
+
+\textbf{Declaración expresa sobre el criterio A3.} La guía exige los cuatro roles en cuatro personas distintas. El Equipo H tiene dos integrantes y los roles de Lectora e Inspectoras recaen en la misma persona por autorización docente. Para preservar en lo posible la independencia del método, los pases I1 e I2 se ejecutaron en fechas distintas, en sesiones separadas y sobre \textbf{alcances disjuntos} del documento, sin consultar el resultado del otro; la Moderadora aportó además un tercer pase sobre el alcance restante. Esta desviación se declara aquí, en los tres Anexos A, en el acta de inspección y en \S11; \textbf{no se presenta como equivalente a una inspección de cuatro personas independientes}.
+
+\subsection{Alcance y preparación individual}
+
+\begin{center}
+\small
+\begin{tabular}{|p{1.4cm}|p{6.6cm}|p{1.5cm}|p{2.2cm}|p{1.6cm}|p{1.4cm}|}
+\hline
+\thead{Pase} & \thead{Alcance} & \thead{Páginas} & \thead{Fecha y hora} & \thead{Horas} & \thead{Defectos} \\ \hline
+I1 & Historial y correcciones; \S I--II (1.1--2.4); \S3.2 (RF-01 a RF-25); \S3.4; \S3.6; \S5.3; \S IX; Anexo A.4 & 58 & 08-08, 19:10--21:40 & 2,5 & 11 \\ \hline
+I2 & \S2.5--2.6; \S3.3; \S3.5; \S IV; \S V; \S VII; \texttt{matriz\_trazabilidad.csv} & 45 & 09-08, 08:00--10:30 & 2,5 & 12 \\ \hline
+Mod & Registro de correcciones; \S2.4.2; \S VI; \S VIII; Anexos A.1--A.3 y B.1; coherencia con el repositorio & 19 & 09-08, 10:45--12:45 & 2,0 & 12 \\ \hline
+\multicolumn{3}{|r|}{\textbf{Total preparación}} & & \textbf{7,0} & \textbf{35} \\ \hline
+\end{tabular}
+\end{center}
+
+Cada pase superó el mínimo de 6 defectos por inspector. Las marcas temporales son verificables en el historial de \emph{commits} del repositorio, todos anteriores a la hora de la reunión.
+
+\subsection{Reunión de inspección}
+La reunión duró 85 minutos, dentro del máximo de 90. La Lectora parafraseó el documento sección por sección, sin lectura literal; los pases reportaron sus hallazgos y la Moderadora consolidó el Anexo B. De las 35 observaciones brutas se fusionaron 6 duplicados, resultando \textbf{29 defectos únicos}. El acta completa, con agenda por bloques horarios e incidencias de conducción, está en \texttt{02\_Inspeccion/Acta\_Reunion\_Inspeccion.md}.
+
+\subsection{Registro de defectos (extracto del Anexo B)}
+El registro completo de los 29 defectos, con sección, descripción, tipo, severidad, requisito afectado, inspector y estado de corrección, está en \texttt{02\_Inspeccion/AnexoB\_registro\_defectos.csv}. Se reproducen aquí los cuatro críticos y una selección de mayores.
+
+\small
+\begin{longtable}{|p{0.9cm}|p{3.4cm}|p{7.6cm}|p{1.6cm}|p{1.3cm}|}
+\hline
+\thead{N.\textsuperscript{o}} & \thead{Sección del ERS} & \thead{Descripción del defecto} & \thead{Tipo} & \thead{Sev.} \\ \hline
+\endfirsthead
+\hline
+\thead{N.\textsuperscript{o}} & \thead{Sección del ERS} & \thead{Descripción del defecto} & \thead{Tipo} & \thead{Sev.} \\ \hline
+\endhead
+D-01 & Anexo A.4 (L2225; PDF p.\,121) & La sección «Declaración de uso de IA generativa» existe solo como título, sin una línea de contenido, mientras el Registro de correcciones 1B$\rightarrow$2A la cita como evidencia de una corrección exigida por el docente y declarada como incorporada. & Completitud & \textcolor{rojo}{\textbf{Crítico}} \\ \hline
+D-02 & Apéndice D y \texttt{matriz\_trazabilidad.csv} & La matriz declarada «fuente de verdad» referencia 18 identificadores HU/CA que no existen en el ERS, y deja vacía la columna ID-HU para 10 requisitos que sí tienen historia. & Trazabilidad & \textcolor{rojo}{\textbf{Crítico}} \\ \hline
+D-03 & \S3.4 fila Art.\,4 y 26 (L941) vs RF-03 y RF-06 & La justificación que sustenta la clasificación Categoría B afirma que SIGA procesa video para determinar ocupación agregada; RF-03 la determina con sensores y \emph{sin} depender de cámaras, y RF-06 solo embebe el flujo. La conclusión legal descansa sobre un comportamiento no especificado. & Consistencia & \textcolor{rojo}{\textbf{Crítico}} \\ \hline
+D-04 & SUP-01 y DEP-01 (L316, L336) vs NFR-16 (L903) & La suposición de conectividad estable en aulas queda refutada por la evidencia EV-15 del propio equipo («no hay internet en la mayoría de las aulas»), sin que la suposición se actualice ni se registre el riesgo. & Factibilidad & \textcolor{rojo}{\textbf{Crítico}} \\ \hline
+D-05 & \S3.3, 3.3.1, 3.3.2, 5.1, 5.2.1, VIII & Siete referencias cruzadas escritas a mano apuntan a la tabla equivocada: «Tabla 39» ($\times$5) señala la ficha de RF-24 y «Tabla 42» ($\times$2) la tabla legal. El fuente define 51 \texttt{\textbackslash label} y no usa un solo \texttt{\textbackslash ref}. & Trazabilidad & \textcolor{ambar}{\textbf{Mayor}} \\ \hline
+D-06 & \S6.1 vs \S6.4 & Dos alcances del MVP mutuamente incompatibles: 12 RF y 71\,\% frente a 11 RF y 64,7\,\%, con cinco requisitos en una lista que no están en la otra. & Consistencia & \textcolor{ambar}{\textbf{Mayor}} \\ \hline
+D-07 & Cronograma A.3 vs \S IV, V, VI y VIII & El cronograma marca «Pendiente» el modelado UML, Kano, WSJF, MVP y el análisis empírico que el cuerpo del documento presenta como ejecutados. & Consistencia & \textcolor{ambar}{\textbf{Mayor}} \\ \hline
+D-10 & \S3.6, HU-01 a HU-17 & Las 17 historias repiten la descripción del requisito en la cláusula «para \(\langle\)beneficio\(\rangle\)» y los 17 escenarios Gherkin usan el comodín «cuando se cumple la condición operativa de RF-nn», con un procedimiento de prueba en la cláusula «Entonces». & Verificabilidad & \textcolor{ambar}{\textbf{Mayor}} \\ \hline
+D-11 & \S4.10, estados de \emph{Alerta} & La transición «Notificada $\rightarrow$ Escalada» invoca un umbral de atención «definido en RNF-01», pero NFR-01 cuantifica el tiempo de \emph{entrega} de la alerta. Ningún requisito especifica el escalado. & Consistencia & \textcolor{ambar}{\textbf{Mayor}} \\ \hline
+D-13 & \S3.4 fila Art.\,43 y 46 & El deber de notificar a la Autoridad en 5 días y al titular en 3 días se mapea a NFR-12, que solo emite una alerta interna al administrador. Nadie notifica fuera del sistema. & Completitud & \textcolor{ambar}{\textbf{Mayor}} \\ \hline
+D-16 & \S IX y todo el fuente & Cero comandos \texttt{\textbackslash cite} en 2\,256 líneas; la bibliografía se emite con \texttt{\textbackslash nocite\{*\}}, imprimiendo las 37 entradas sin que ninguna esté citada en el texto. & Trazabilidad & \textcolor{ambar}{\textbf{Mayor}} \\ \hline
+D-17 & Registro de correcciones, fila 2 & La celda declara la corrección hecha y pendiente a la vez, y el directorio de evidencia citado contiene 9 subcarpetas y ningún archivo. & Trazabilidad & \textcolor{ambar}{\textbf{Mayor}} \\ \hline
+D-18 & \S7.1 vs \S7.2--7.3 & Población de 26 requisitos de LLM frente a 25 humanos con diseño «cuasi-experimento apareado» y prueba t apareada: conjuntos de distinto tamaño no admiten apareamiento. & Factibilidad & \textcolor{ambar}{\textbf{Mayor}} \\ \hline
+D-23 & \S2.4.2, conflicto de apagado & La estrategia declarada compromete «permitir excepciones autorizadas»; ningún RF de RF-01 a RF-25 especifica ese mecanismo. Riesgo: apagar equipos durante una clase extendida. & Trazabilidad & \textcolor{ambar}{\textbf{Mayor}} \\ \hline
+\caption{Extracto del Anexo B --- registro consolidado de defectos (4 críticos y 10 de los 19 mayores)}
+\end{longtable}
+\normalsize
+
+\subsection{Métricas de inspección}
+
+\subsubsection*{M1 --- Densidad de defectos}
+\begin{center}
+Densidad global $= 29 / 122 = 0{,}238$ defectos por página \qquad
+Densidad crítico-mayor $= 23 / 122 = 0{,}189$ defectos por página
+\end{center}
+\textbf{Interpretación.} Un defecto cada 4,2 páginas. El ERS no está improvisado --- un documento sin control de calidad supera habitualmente un defecto por página --- pero el 79\,\% de los hallazgos compromete la validez del artefacto. Lo que la densidad revela es \emph{dónde} se concentran: las fichas de requisitos, que ocupan la mayor parte del documento, aportaron pocos defectos; los anexos, la matriz y la sección V los concentran. La calidad no falla en la redacción de cada requisito, sino en la costura entre partes.
+
+\subsubsection*{M2 --- Distribución por tipo}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1]
+\def\bar#1#2#3#4{% y, valor, ancho, etiqueta
+  \fill[uteqverde!#3] (0,#1) rectangle (#2,{#1+0.55});
+  \node[anchor=east] at (-0.15,{#1+0.28}) {\small #4};
+  \node[anchor=west] at ({#2+0.1},{#1+0.28}) {\small\bfseries };
+}
+% escala: 1 unidad = 1 defecto * 0.85
+\fill[uteqverde]      (0,5.0) rectangle (8.50,5.55); \node[anchor=east] at (-0.15,5.28){\small Consistencia};   \node[anchor=west] at (8.65,5.28){\small\bfseries 10 (34,5\%)};
+\fill[uteqverde!80]   (0,4.2) rectangle (5.95,4.75); \node[anchor=east] at (-0.15,4.48){\small Trazabilidad};   \node[anchor=west] at (6.10,4.48){\small\bfseries 7 (24,1\%)};
+\fill[uteqverde!62]   (0,3.4) rectangle (3.40,3.95); \node[anchor=east] at (-0.15,3.68){\small Completitud};    \node[anchor=west] at (3.55,3.68){\small\bfseries 4 (13,8\%)};
+\fill[uteqverde!62]   (0,2.6) rectangle (3.40,3.15); \node[anchor=east] at (-0.15,2.88){\small Verificabilidad};\node[anchor=west] at (3.55,2.88){\small\bfseries 4 (13,8\%)};
+\fill[uteqverde!40]   (0,1.8) rectangle (1.70,2.35); \node[anchor=east] at (-0.15,2.08){\small Ambigüedad};     \node[anchor=west] at (1.85,2.08){\small\bfseries 2 (6,9\%)};
+\fill[uteqverde!40]   (0,1.0) rectangle (1.70,1.55); \node[anchor=east] at (-0.15,1.28){\small Factibilidad};   \node[anchor=west] at (1.85,1.28){\small\bfseries 2 (6,9\%)};
+\draw[gray] (0,0.8) -- (0,5.8);
+\end{tikzpicture}
+\caption{M2 --- Distribución de los 29 defectos por tipo (ISO/IEC/IEEE 29148:2018)}
+\end{figure}
+
+\textbf{Interpretación.} La \emph{consistencia} domina con el 34,5\,\%, seguida de la \emph{trazabilidad} con el 24,1\,\%: casi seis de cada diez defectos son fallos de coherencia entre partes del documento, no de redacción de requisitos. Es el patrón característico de un ERS crecido por acumulación de entregas (1A $\rightarrow$ 1B $\rightarrow$ 2A) sin un pase de integración final: cada sección es correcta por separado y el conjunto se contradice. Que la \emph{ambigüedad} sea el tipo menos frecuente --- 2 casos sobre 29 --- confirma que el equipo FGMMN redacta requisitos con precisión; los 25 RF cuantifican su criterio de verificación sin un solo término de grado sin umbral. El problema de este ERS no es cómo se escribe cada requisito, sino cómo se conectan entre sí.
+
+\subsubsection*{M3 --- Distribución por severidad}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1]
+\fill[rojo]   (0,3.0) rectangle (1.60,3.55); \node[anchor=east] at (-0.15,3.28){\small Crítico}; \node[anchor=west] at (1.75,3.28){\small\bfseries 4 (13,8\%)};
+\fill[ambar]  (0,2.2) rectangle (7.60,2.75); \node[anchor=east] at (-0.15,2.48){\small Mayor};   \node[anchor=west] at (7.75,2.48){\small\bfseries 19 (65,5\%)};
+\fill[gray!55](0,1.4) rectangle (2.40,1.95); \node[anchor=east] at (-0.15,1.68){\small Menor};   \node[anchor=west] at (2.55,1.68){\small\bfseries 6 (20,7\%)};
+\draw[gray] (0,1.2) -- (0,3.8);
+\end{tikzpicture}
+\caption{M3 --- Distribución de los 29 defectos por severidad}
+\end{figure}
+
+\textbf{Interpretación.} Los cuatro defectos críticos comparten un rasgo: ninguno se corrige con redacción. Una sección vacía declarada como corregida, una matriz que cita requisitos inexistentes, una base legal sin requisito que la sustente y una suposición refutada por la propia evidencia son fallos que exigen decisión de gestión, no edición de texto. El bloque mayor (65,5\,\%) reúne incoherencias que un lector externo detecta y que impiden usar el ERS como base contractual. Solo el 20,7\,\% son erratas de forma sin efecto sobre la interpretación de ningún requisito.
+
+\subsubsection*{M4 --- Tasa de detección por inspector}
+\begin{center}
+\small
+\begin{tabular}{|p{4.6cm}|p{1.8cm}|p{1.8cm}|p{1.9cm}|p{4.4cm}|}
+\hline
+\thead{Pase} & \thead{Defectos} & \thead{\% total} & \thead{Def./página} & \thead{Alcance} \\ \hline
+Chavarria --- pase I1 & 11 & 37,9\,\% & 0,19 & 58 pág. (\S I--III, 3.6, 5.3, IX) \\ \hline
+Chavarria --- pase I2 & 11 & 37,9\,\% & 0,24 & 45 pág. (\S2.5--2.6, 3.3, IV, V, VII) \\ \hline
+Muñoz --- pase de la Moderadora & 7 & 24,1\,\% & \textbf{0,37} & 19 pág. (MVP, conclusiones, anexos, repositorio) \\ \hline
+\end{tabular}
+\end{center}
+
+\textbf{Interpretación.} El pase más productivo por página no fue el que revisó más documento, sino el que \textbf{contrastó el ERS contra artefactos externos} --- el \texttt{CHANGELOG.md}, el \texttt{README} del MVP, el árbol de directorios del repositorio --- en lugar de contrastarlo solo consigo mismo. Con 0,37 defectos por página casi duplicó el rendimiento del pase I1. Es el hallazgo metodológico más útil de esta inspección: los defectos de coherencia externa son más densos y más baratos de encontrar que los internos, y una inspección que solo lee el documento los deja pasar. El solapamiento del 21\,\% entre pases (6 duplicados sobre 35 observaciones) indica que la división de alcances funcionó: un solapamiento nulo habría delatado que nadie revisó fuera de su zona, y uno alto que la división no sirvió.
+
+\subsubsection*{M5 --- Esfuerzo total}
+\begin{center}
+\small
+\begin{tabular}{|p{6.0cm}|p{2.6cm}|p{6.0cm}|}
+\hline
+\thead{Actividad} & \thead{Horas-persona} & \thead{Proporción} \\ \hline
+Preparación individual (3 pases) & 7,0 & 70\,\% \\ \hline
+Reunión de inspección (85 min $\times$ 2) & 3,0 & 30\,\% \\ \hline
+\textbf{Total inspección} & \textbf{10,0} & 100\,\% \\ \hline
+\textbf{Eficiencia de detección} & \multicolumn{2}{l|}{\textbf{2,9 defectos por hora-persona}} \\ \hline
+\end{tabular}
+\end{center}
+
+\textbf{Interpretación.} El 70\,\% del esfuerzo está antes de la reunión, que es exactamente el reparto que predice Fagan: la reunión consolida, no descubre \cite{fagan1976}. De los 29 defectos, los 29 se registraron en la preparación individual y ninguno surgió por primera vez en la sesión; lo que la sesión aportó fue la fusión de 6 duplicados y el acuerdo sobre severidad. Cada hora-persona identificó 2,9 defectos: detectarlos aquí cuesta órdenes de magnitud menos que detectarlos tras el despliegue.
+
+%======================================================================
+\section{Correcciones aplicadas}
+
+Se corrigió el \textbf{100\,\% de los defectos críticos y mayores} (23 de 23). Los 6 menores se documentaron sin corregir, con justificación registrada. La tabla completa con texto antes y después está en \texttt{02\_Inspeccion/correcciones\_aplicadas.csv}; los bloques \LaTeX{} corregidos, con la línea del fuente que reemplazan, están en \texttt{01\_ERS/ERS\_SIGA\_v1.1\_delta.tex}. Se reproduce aquí una selección representativa.
+
+\small
+\begin{longtable}{|p{0.85cm}|p{5.4cm}|p{5.4cm}|p{2.4cm}|}
+\hline
+\thead{Def.} & \thead{Texto ANTES (v1.0)} & \thead{Texto DESPUÉS (v1.1)} & \thead{Requisito afectado} \\ \hline
+\endfirsthead
+\hline
+\thead{Def.} & \thead{Texto ANTES (v1.0)} & \thead{Texto DESPUÉS (v1.1)} & \thead{Requisito afectado} \\ \hline
+\endhead
+D-01 & \emph{[Título «A.4 Declaración de uso de IA generativa» sin ninguna línea de contenido]} & Declaración completa: herramienta y versión, tres tareas asistidas acotadas, tareas expresamente no asistidas, verificación crítica realizada por el Verificador y la Documentadora, y firma de los cinco integrantes. & Apéndice A.4 \\ \hline
+D-03 & «SIGA procesa el video de la cámara únicamente para determinar presencia/ocupación de forma agregada \dots\ no almacena el video ni los fotogramas» & La ocupación se determina exclusivamente por sensores (RF-03). Se añaden a RF-06 dos postcondiciones verificables: (b) no persistir video ni fotogramas; (c) no ejecutar reconocimiento facial. La Categoría B se sustenta en ellas. & RF-06, RD-05 \\ \hline
+D-04 & SUP-01: «Se asume que las aulas y laboratorios contarán con conectividad Wi-Fi o red cableada estable» & «\textbf{No} se asume conectividad estable. EV-15 establece que la mayoría de las aulas carece de conexión. Se asume solo que las aulas piloto de RD-08 la recibirán antes del despliegue, como precondición de despliegue.» Se crea el riesgo RG-01 con NFR-16 como mitigación. & SUP-01, DEP-01, NFR-16 \\ \hline
+D-05 & «\dots se declara en la columna Estado de validación de la \textbf{Tabla 39}» ($\times$5) & «\dots de la Tabla \texttt{\textbackslash ref\{tab:rnf\}}». Se etiquetan las 68 tablas y las 51 figuras y se sustituyen las siete referencias numéricas escritas a mano. & Referencias cruzadas \\ \hline
+D-06 & «Esto representa 12 de 17 RF Must (71\,\%)» frente a «cubriendo 11 de los 17 RF Must (64,7\,\%)» & Alcance único y verificable contra el código: 11 de 20 RF Must (55\,\%), con el denominador actualizado por la RFC-03 y los 5 RF diferidos declarados con su justificación. & \S6.1, MVP \\ \hline
+D-10 & «\dots quiero que el sistema recopilación de datos ambientales mediante sensores iot, para el sistema debe capturar en tiempo real \dots\ cuando se cumple la condición operativa de RF-01» & «\dots quiero consultar la temperatura, la humedad y la ocupación de cada aula en tiempo real, \textbf{para} detectar una condición anómala antes de que interrumpa una clase. \textbf{Cuando} el sensor emite una lectura, \textbf{Entonces} el panel la muestra con marca de tiempo en $\leq$10 s y error $\leq$1\,$^{\circ}$C.» & HU-01 a HU-17 \\ \hline
+D-11 & «Notificada $\rightarrow$ Escalada (sin atención dentro del umbral de tiempo definido en RNF-01)» & Se crean NFR-17 (umbral de escalado de 30 min) y RF-26 (escalado automático de alertas críticas). La transición pasa a citar NFR-17 y a ejecutarse por RF-26. & NFR-17, RF-26 \\ \hline
+D-12 & RF-13 y RF-16 con el mismo comportamiento, misma prioridad y mismo umbral de 2 min & RF-13 acota su disparador a «aula desocupada 15 min \emph{dentro} del horario, equipo individual»; RF-16 a «fin de horario, apagado total». Disparadores disjuntos, umbral conservado. & RF-13, RF-16 \\ \hline
+D-13 & «RNF-12: alerta automática al administrador \dots\ que permite cumplir los plazos de los Art.\,43 y 46» & Se crea RF-27: expediente de la brecha y notificación a la Autoridad en $\leq$5 días y a cada titular en $\leq$3 días, con NFR-18 como criterio. NFR-12 conserva su alcance real de detección. & RF-27, NFR-18 \\ \hline
+D-14 & RF-24 y RF-25: «Prioridad: Should \dots\ en $\leq$15 días \textbf{hábiles}» & Ambos pasan a \emph{Must} («derecho de ejercicio obligatorio del titular») y el plazo se corrige a «$\leq$15 días» naturales, alineado con el Art.\,13 y el Art.\,14. & RF-24, RF-25, NFR-11 \\ \hline
+D-16 & \texttt{\textbackslash nocite\{*\}} con 37 entradas impresas y 0 citas & Se elimina \texttt{\textbackslash nocite} y se introducen citas en el punto de uso; se depuran las entradas no usadas y se verifica el DOI de las restantes. & \S IX \\ \hline
+D-17 & «Subida de grabación en $\geq$720p \dots\ mientras se completa la nueva grabación. Evidencia: \texttt{02\_Evidencias/Video/}» & «\textbf{Pendiente.} La regrabación no se ha realizado. El directorio contiene la estructura de carpetas pero ningún archivo; los originales residen en la zona restringida. Se compromete para 2B.» & Registro 1B$\rightarrow$2A \\ \hline
+D-23 & Estrategia: «permitir excepciones autorizadas», sin RF destino & Se crea RF-31 (excepción autorizada de apagado, \emph{Must}), con máximo de 4 horas, motivo obligatorio, caducidad automática y registro en bitácora. Tramitado como RFC-01. & RF-31 \\ \hline
+\caption{Extracto de las 23 correcciones aplicadas --- texto antes y después}
+\end{longtable}
+\normalsize
+
+\textbf{Defectos menores no corregidos.} Los seis se documentan con justificación: D-24 (nomenclatura RNF/NFR) afecta a 71 apariciones y se difiere para no introducir errores de sustitución masiva en la misma versión que aplica 23 correcciones de fondo; D-25 y D-29 son erratas de forma sin efecto interpretativo; D-26 desaparece por efecto de la corrección D-15; D-27 requiere confirmar la denominación institucional vigente ante la Coordinación, y se registra como consulta abierta en lugar de fijarse arbitrariamente; D-28 se resuelve dentro de la corrección D-22.
+
+%======================================================================
+\section{Gestión del cambio y CCB}
+
+\subsection{Las tres solicitudes de cambio}
+Las tres RFC proceden de defectos reales de la inspección del Paso 1; ninguna procede de un escenario hipotético. Los formularios completos están en \texttt{03\_CCB/RFC-0\{1,2,3\}.md}.
+
+\begin{center}
+\small
+\begin{tabular}{|p{1.4cm}|p{2.6cm}|p{4.6cm}|p{2.3cm}|p{3.3cm}|}
+\hline
+\thead{RFC} & \thead{Naturaleza} & \thead{Cambio} & \thead{Origen} & \thead{Costo / Riesgo} \\ \hline
+RFC-01 & Alcance (RF nuevo) & RF-31: excepción autorizada de apagado automático, que inhibe RF-13, RF-15 y RF-16 sobre un aula y un rango horario & Defecto D-23 & 34 h-persona / Medio \\ \hline
+RFC-02 & Calidad (modificación de RNF) & Cuantificar NFR-16 en $\leq$30 s, elevarlo a \emph{Must}, reformular SUP-01 y DEP-01 y registrar el riesgo RG-01 & Defecto D-04 (crítico) & 21 h-persona / Alto si no se hace \\ \hline
+RFC-03 & Normativa & RF-27 y NFR-18 (notificación de brechas), RF-24 y RF-25 a \emph{Must}, plazo «15 días hábiles» $\rightarrow$ «15 días» & Defectos D-13 y D-14 & 28 h-persona / Alto si no se hace \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Análisis de impacto derivado de la matriz}
+El impacto de cada RFC se obtuvo recorriendo la matriz de trazabilidad, no estimándolo a ojo. El caso de la RFC-02 ilustra el valor del método: el impacto \emph{directo} es evidente --- NFR-16, SUP-01, DEP-01, RF-22 y RF-07 ---, pero al seguir las filas de la matriz aparecieron dos impactos \emph{indirectos} que nadie había formulado. El primero es que RF-13 y RF-16 no deben ejecutar apagado automático con datos de ocupación obsoletos: sin esa guarda, un aula ocupada cuyo gateway ha caído se queda a oscuras porque el sistema cree que está vacía. El segundo es que NFR-01, que compromete la entrega de alertas en $\leq$60 s, es inalcanzable en un aula sin red y debe declararse condicionado. Ninguno de los dos aparece en el enunciado de la RFC; ambos salieron de recorrer la matriz.
+
+\begin{center}
+\small
+\begin{tabular}{|p{1.4cm}|p{6.2cm}|p{6.6cm}|}
+\hline
+\thead{RFC} & \thead{Impacto directo} & \thead{Impacto indirecto (derivado de la matriz)} \\ \hline
+RFC-01 & RF-13, RF-15, RF-16, RF-23, RF-19 & RF-07 (indicador de excepción en el panel); RF-21 (no notificar equipo fuera de horario bajo excepción vigente); RD-13 (el horario deja de ser la única fuente de verdad) \\ \hline
+RFC-02 & NFR-16, SUP-01, DEP-01, RF-22, RF-07 & RF-01, RF-03 (tercera condición «desconocido»); \textbf{RF-13 y RF-16} (guarda contra apagado con datos obsoletos); RF-08 y RF-11 (encolar alertas no entregables); NFR-01 (umbral condicionado) \\ \hline
+RFC-03 & NFR-12, RF-24, RF-25, NFR-11, RF-23, RD-09 & RF-19 (rol de responsable de protección de datos); RF-18 (exportación del expediente probatorio); RF-03 y RF-06 (alcanzados por la ampliación de RD-09); NFR-03 (medida técnica a declarar en el expediente); \textbf{recálculo de la cobertura del MVP} \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Acta del CCB y decisiones}
+El CCB se reunió el 9 de agosto de 2026 de 17:00 a 18:30, con cuatro roles diferenciados --- presidente, representante del cliente, analista y desarrollador --- asumidos por las dos integrantes, argumentando separadamente desde cada perspectiva. El orden de deliberación se alteró respecto del numérico a propuesta del analista, tratando primero la RFC-02 por introducir la guarda que protege los requisitos que la RFC-01 modifica. El acta completa, con deliberación por RFC, alternativas descartadas y acciones abiertas, está en \texttt{03\_CCB/Acta\_CCB.md}.
+
+\begin{center}
+\small
+\begin{tabular}{|p{1.2cm}|p{2.9cm}|p{1.3cm}|p{6.4cm}|p{2.6cm}|}
+\hline
+\thead{RFC} & \thead{Decisión} & \thead{Votos} & \thead{Condición o justificación} & \thead{Responsable / plazo} \\ \hline
+RFC-02 & Aprobado & 4--0 & Corrige un defecto crítico de factibilidad y cierra un riesgo funcional no formulado. Prioridad de implementación 1 de 3. & Cedeño Winston / sem.\,16 \\ \hline
+RFC-03 & Aprobado con condiciones & 3--0--1 & RF-27 se especifica ya pero se implementa en 2B; su viabilidad depende de que la Facultad designe un responsable de protección de datos. Se recalcula y declara la cobertura del MVP al 55\,\%. & Gilces José / sem.\,17 \\ \hline
+RFC-01 & Aprobado con condiciones & 4--0 & Duración máxima de la excepción: 4 horas; motivo obligatorio; caducidad automática; registro en bitácora. Prioridad 3 de 3. & Sánchez Gary / sem.\,17 \\ \hline
+\end{tabular}
+\end{center}
+
+\textbf{Discrepancia registrada.} El desarrollador se abstuvo en la votación de RF-27, por considerar que el CCB no puede comprometer un requisito cuya viabilidad depende de una designación institucional ajena al equipo. La abstención se registró como tal y no se computó como voto favorable.
+
+\subsection{Versión resultante}
+El ERS pasa de \textbf{v1.0} a \textbf{\versionbase}, incorporando las 23 correcciones y los cambios aprobados. Se crean RF-26, RF-27, RF-28, RF-29, RF-30, RF-31, NFR-17 y NFR-18; se repriorizan RF-24, RF-25 y NFR-16; se modifican RF-06, RF-13, RF-16, RF-19, RF-21, NFR-11, NFR-12, SUP-01, DEP-01, RD-09 y RD-13. Los RF \emph{Must} pasan de 17 a 20 y la cobertura del MVP se recalcula del 64,7\,\% al 55\,\%, en lugar de mantenerse sobre un denominador desactualizado --- precisamente el tipo de incoherencia que la inspección detectó en el defecto D-06. \textbf{La versión \versionbase\ se declara de forma idéntica en la portada de este informe, en el \texttt{CHANGELOG.md} y en el \emph{tag} de Git.}
+
+%======================================================================
+\section{Trazabilidad en herramienta CASE}
+
+\subsection{Estructura del tablero}
+Se seleccionó \textbf{Trello} por gratuidad y disponibilidad inmediata para las dos integrantes y el docente. El tablero \texttt{SIGA --- Sistema Inteligente de Gestión de Aulas (ISR-401)} se organiza en cinco listas --- \emph{Backlog}, \emph{Análisis}, \emph{Aprobado}, \emph{Desarrollo}, \emph{Hecho} --- con criterio de entrada explícito para cada una. Contiene \textbf{6 épicas} (mínimo 4), \textbf{24 historias} (mínimo 15) y \textbf{14 sub-tareas de criterio de aceptación repartidas en 6 historias} (mínimo 2 en 5 historias). La definición completa está en \texttt{04\_Trazabilidad/tablero\_definicion.md} y la exportación en \texttt{04\_Trazabilidad/backlog\_export.csv} (Anexo D).
+
+\subsection{Campos personalizados}
+\begin{center}
+\small
+\begin{tabular}{|p{3.4cm}|p{4.4cm}|p{7.0cm}|}
+\hline
+\thead{Campo} & \thead{Valores} & \thead{Uso} \\ \hline
+Prioridad MoSCoW & Must / Should / Could / Won't & Refleja la \S5.2 del ERS, ya con RF-24 y RF-25 elevados a \emph{Must} por la RFC-03 \\ \hline
+Fuente del requisito & \texttt{EV-nn}, \texttt{RC-nn}, \texttt{LOPDP Art.\,nn}, \texttt{RFC-nn}, \texttt{D-nn} & Es el enlace hacia atrás: cada tarjeta declara el \emph{stakeholder} o documento del que procede \\ \hline
+Estado de verificación & Verificado en MVP / Parcialmente sustentado / No verificado / Pendiente 2B / Nuevo por RFC & Tercer campo. Reproduce en el tablero la columna «Estado de validación» del ERS, que es el punto más sólido del documento inspeccionado \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Trazabilidad bidireccional y requisitos huérfanos}
+Cada tarjeta lleva dos bloques de enlaces: \emph{hacia atrás} (stakeholder, \texttt{EV-nn}, \texttt{RC-nn}, artículo de la LOPDP o defecto que la originó) y \emph{hacia adelante} (\texttt{CU-nn}, clase o módulo, \texttt{MU-nn} y caso de prueba \texttt{PR-nn}). Los requisitos huérfanos se reportan explícitamente en lugar de ocultarse: \textbf{RF-24 y RF-25 son huérfanos reales hacia atrás} --- se sustentan solo en análisis normativo, sin evidencia de campo, cosa que el propio ERS reconoce --- y RF-28, RF-29 y RF-30 carecen aún de caso de prueba ejecutado por ser formalizaciones recientes de los «candidatos» del catálogo B.1.
+
+\subsection{Matriz de trazabilidad}
+La matriz completa, con 58 filas, está en \texttt{04\_Trazabilidad/matriz\_trazabilidad.csv}. Se reproduce a continuación un extracto de 18 filas en la forma \emph{Stakeholder $\rightarrow$ RF $\rightarrow$ CU $\rightarrow$ Clase/Módulo $\rightarrow$ Prueba} exigida por la guía.
+
+\small
+\begin{longtable}{|p{3.4cm}|p{1.2cm}|p{1.6cm}|p{1.4cm}|p{2.8cm}|p{1.3cm}|p{2.0cm}|}
+\hline
+\thead{Stakeholder} & \thead{EV} & \thead{RF/RNF} & \thead{CU} & \thead{Clase / Módulo} & \thead{Prueba} & \thead{Estado} \\ \hline
+\endfirsthead
+\hline
+\thead{Stakeholder} & \thead{EV} & \thead{RF/RNF} & \thead{CU} & \thead{Clase / Módulo} & \thead{Prueba} & \thead{Estado} \\ \hline
+\endhead
+Infraestructura y Mant. & EV-01 & RF-01 & CU-01, 03 & SensorIoT, LecturaSensor & PR-01 & Verif. MVP \\ \hline
+Infraestructura y Mant. & EV-01 & RF-02 & CU-02 & GatewayIoT, Equipo & PR-02 & Pend.\,2B \\ \hline
+Infraestructura y Mant. & EV-01 & RF-03 & CU-03 & SensorIoT, Aula & PR-03 & Verif. MVP \\ \hline
+Infraestructura, Coord., Estudiantes & EV-01, 02, 03 & RF-04 & CU-01, 02 & Proyector & PR-04 & Pend.\,2B \\ \hline
+Infraestructura y Mant. & EV-01, 07 & RF-06 & CU-15 & CamaraVigilancia & PR-06 & Modif.\ D-03 \\ \hline
+Infraestructura, Coord., Estudiantes & EV-01, 02, 03, 08--10, 16 & RF-07 & CU-01 & Aula, PanelControl & PR-07 & Verif. MVP \\ \hline
+Infraestructura, Estudiantes & EV-01, 03, 12 & RF-08 & CU-04, 05 & Alerta & PR-08 & Verif. MVP \\ \hline
+Infraestructura y Mant. & EV-01, 05 & RF-13 & CU-13 & Equipo, MotorReglas & PR-13 & Verif. MVP \\ \hline
+Infraestructura y Mant. & EV-01, 05, 12 & RF-16 & CU-03, 13 & Aula, MotorReglas & PR-16 & Verif. MVP \\ \hline
+Coordinación, TI & EV-02, 10, 13 & RF-19 & CU-11 & Usuario, Rol & PR-19 & Verif. MVP \\ \hline
+Infraestructura, Coordinación & EV-01, 02, 11, 15 & RF-23 & CU-14 & BitacoraAccion & PR-23 & Verif. MVP \\ \hline
+Titular de datos & --- & RF-24 & CU-11 & Usuario & PR-24 & Repri.\ RFC-03 \\ \hline
+Titular de datos & --- & RF-25 & CU-11 & Usuario & PR-25 & Repri.\ RFC-03 \\ \hline
+Infraestructura, Autoridades & EV-12 & RF-26 & CU-05 & Alerta, MotorEscalado & PR-26 & Nuevo D-11 \\ \hline
+Titular de datos, TI & --- & RF-27 & CU-17 & IncidenteSeguridad & PR-27, 49 & Nuevo RFC-03 \\ \hline
+Docente, Infraestructura & EV-12 & RF-31 & CU-13 & ExcepcionApagado & PR-31 & Nuevo RFC-01 \\ \hline
+Docente & EV-15 & NFR-16 & CU-01, 12 & Aula, PanelControl & PR-47 & Cuant.\ RFC-02 \\ \hline
+Infraestructura, Autoridades & EV-12 & NFR-17 & CU-05 & MotorEscalado & PR-48 & Nuevo D-11 \\ \hline
+\caption{Extracto de la matriz de trazabilidad --- 18 de 58 filas (mínimo exigido: 15)}
+\end{longtable}
+\normalsize
+
+\textbf{Capturas.} Las capturas del tablero completo, del detalle de tres \emph{issues} con sus enlaces visibles y del panel de estadísticas están especificadas en \texttt{04\_Trazabilidad/capturas/LEEME\_CAPTURAS.md} y deben tomarse desde las cuentas de las integrantes, con el nombre del tablero visible, conforme al criterio de admisión A2.
+
+%======================================================================
+\section{Línea base con Git}
+
+\subsection{Repositorio y estructura}
+El repositorio público \texttt{\repourl} sigue la estructura convenida en la sección 7 de la guía:
+
+\begin{center}
+\small\ttfamily
+\begin{tabular}{@{}l l@{}}
+ISR401-PFC-ERS-EquipoH/ & \\
+\quad README.md & sistema, integrantes, estructura e instrucciones de compilación \\
+\quad CHANGELOG.md & una entrada por RFC aprobada \\
+\quad 01\_ERS/ & ERS v1.0 inspeccionado (PDF y fuentes) + delta de correcciones v1.1 \\
+\quad 02\_Inspeccion/ & AnexoA\_checklists/, AnexoB\_registro\_defectos.csv, metricas.csv \\
+\quad 03\_CCB/ & RFC-01, RFC-02, RFC-03, Acta\_CCB \\
+\quad 04\_Trazabilidad/ & matriz\_trazabilidad.csv, backlog\_export.csv, capturas/ \\
+\quad 05\_Informe/ & PE4\_U4\_MUNOZ\_CHAVARRIA.tex, .bib, .pdf, figuras/ \\
+\quad 06\_Evidencias/ & capturas\_git/, fotos\_sesion/, declaracion\_IA.md \\
+\end{tabular}
+\end{center}
+
+\subsection{Commits semánticos}
+El historial contiene \textbf{14 \emph{commits} semánticos} distribuidos entre las dos integrantes según la propiedad del artefacto, superando el mínimo de 8. No hay ningún \emph{commit} de carga masiva.
+
+\begin{center}
+\small
+\begin{tabular}{|p{9.6cm}|p{5.0cm}|}
+\hline
+\thead{Mensaje de commit} & \thead{Autoría} \\ \hline
+\texttt{chore(repo): estructura inicial del entregable PE4} & Muñoz Yeranick \\ \hline
+\texttt{docs(ers): incorporar el ERS SIGA v1.0 como artefacto inspeccionado} & Muñoz Yeranick \\ \hline
+\texttt{insp(anexo-a): pase I1 de Chavarria sobre el ERS v1.0} & Chavarria Tahiny \\ \hline
+\texttt{insp(anexo-a): pase I2 de Chavarria sobre el ERS v1.0} & Chavarria Tahiny \\ \hline
+\texttt{insp(anexo-a): pase de revision de la Moderadora sobre el ERS v1.0} & Muñoz Yeranick \\ \hline
+\texttt{insp(anexo-b): consolidar 29 defectos unicos de la inspeccion Fagan} & Muñoz Yeranick \\ \hline
+\texttt{insp(acta): acta de la reunion de inspeccion del 2026-08-09} & Muñoz Yeranick \\ \hline
+\texttt{insp(metricas): calcular e interpretar las cinco metricas M1-M5} & Chavarria Tahiny \\ \hline
+\texttt{fix(ers): aplicar las 23 correcciones de defectos criticos y mayores} & Chavarria Tahiny \\ \hline
+\texttt{feat(ccb): tramitar RFC-01, RFC-02 y RFC-03 con analisis de impacto} & Muñoz Yeranick \\ \hline
+\texttt{docs(ccb): acta del CCB con decisiones motivadas y acciones abiertas} & Muñoz Yeranick \\ \hline
+\texttt{feat(traza): matriz corregida y backlog del tablero CASE} & Chavarria Tahiny \\ \hline
+\texttt{docs(informe): informe PE4 en LaTeX con las 14 secciones} & Chavarria Tahiny \\ \hline
+\texttt{docs(ers): v1.1 --- aplicar cambios aprobados por el CCB semana 14} & Muñoz Yeranick \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Tag de línea base y CHANGELOG}
+La línea base se publica como \emph{tag} anotado:
+
+\begin{center}
+\ttfamily\small
+git tag -a baseline-v1.1 -m "Baseline aprobada por CCB"\\
+git push origin baseline-v1.1
+\end{center}
+
+El \texttt{CHANGELOG.md} sigue el formato \emph{[Versión] --- [Fecha] / Añadido / Cambiado / Eliminado}, con una entrada por RFC aprobada y su identificador. La coherencia de versión es total: \textbf{\versionbase} aparece idéntica en la portada de este informe, en el \texttt{CHANGELOG.md} y en el \emph{tag}. Las capturas de \texttt{git log --oneline --graph --decorate} y \texttt{git tag -n} constituyen el Anexo E y están especificadas en \texttt{06\_Evidencias/capturas\_git/LEEME\_CAPTURAS\_GIT.md}.
+
+%======================================================================
+\section{Comparativa de herramientas CASE}
+
+Cinco herramientas evaluadas sobre seis criterios. Cada celda es un juicio del equipo, contrastado con la fuente indicada y con el uso real que se le dio en esta práctica; no es una transcripción del material comercial.
+
+\small
+\begin{longtable}{|p{2.1cm}|p{2.5cm}|p{2.5cm}|p{2.4cm}|p{2.2cm}|p{2.0cm}|}
+\hline
+\thead{Criterio} & \thead{Jira} & \thead{IBM DOORS Next} & \thead{Jama Connect} & \thead{ReqView} & \thead{Trello} \\ \hline
+\endfirsthead
+\hline
+\thead{Criterio} & \thead{Jira} & \thead{IBM DOORS Next} & \thead{Jama Connect} & \thead{ReqView} & \thead{Trello} \\ \hline
+\endhead
+Funcionalidades de IR & Media. Gestor de \emph{issues} adaptado a IR con tipos y campos propios; no distingue nativamente requisito de tarea & Alta. Diseñada como gestor de requisitos: atributos tipados, vistas, líneas base y \emph{ReqIF} & Alta. Repositorio de requisitos con revisiones, aprobaciones y gestión de riesgo integrada & Media-alta. Gestor documental de requisitos con atributos y ReqIF, sin flujo de aprobación & Baja. Gestor de tareas; la IR debe emularse con convenciones \\ \hline
+Trazabilidad & Media. Enlaces tipados entre \emph{issues}; matriz no nativa, requiere complemento & Alta. Trazabilidad nativa multinivel con análisis de impacto y detección de enlaces sospechosos & Alta. Matriz nativa con cobertura y análisis de impacto & Media-alta. Matriz nativa; sin detección de enlaces obsoletos & Baja. Solo mediante campos personalizados; sin validación de integridad \\ \hline
+\emph{Baselining} y control de cambios & Media. Versionado de \emph{issues} y flujos configurables; línea base no nativa & Alta. Líneas base comparables y flujo de cambio formal & Alta. Líneas base, comparación de versiones y aprobación electrónica & Media. Instantáneas de documento; sin CCB integrado & Ninguna. No existe concepto de línea base \\ \hline
+Colaboración & Alta. Comentarios, menciones, notificaciones y permisos por proyecto & Media-alta. Revisiones formales; interfaz densa & Alta. Revisiones con aprobación y comentario en línea & Media. Pensada para equipos pequeños; colaboración por archivo & Alta para lo que es; comentarios y menciones sencillos \\ \hline
+Integración con VCS & Alta. Integración madura con Git: los \emph{commits} enlazan con la clave del \emph{issue} & Media. Integración con la plataforma propia; con Git externo requiere trabajo & Media-alta. Conectores con Git y con herramientas de prueba & Baja-media. Archivos versionables en Git, sin integración semántica & Baja. Sin vínculo con \emph{commits} \\ \hline
+Costo y curva de aprendizaje & Gratuito hasta 10 usuarios; curva media & Licencia comercial alta; curva alta & Licencia comercial alta; curva media-alta & Licencia perpetua moderada; curva baja & Gratuito; curva muy baja \\ \hline
+\caption{Comparativa de cinco herramientas CASE sobre seis criterios}
+\end{longtable}
+\normalsize
+
+\textbf{Recomendación argumentada para el PFC.} Para SIGA en su estado actual la recomendación es \textbf{Trello para la Entrega 2B y migración a Jira si el proyecto continúa más allá del PFC}. El razonamiento no es de funcionalidad sino de coste de adopción frente a lo que el proyecto necesita ahora. DOORS Next y Jama Connect son técnicamente superiores en todos los criterios de IR y resolverían por diseño el defecto D-02 --- una matriz que referencia identificadores inexistentes es imposible en un repositorio con enlaces tipados ---, pero su licencia y su curva de aprendizaje son inasumibles para un equipo de pregrado con 4 semanas de horizonte. ReqView es la opción más interesante que se descartó: su coste es moderado y su curva baja, pero carece de flujo de aprobación, y el CCB es exactamente la actividad que esta práctica exige evidenciar.
+
+Entre Trello y Jira, la elección es de oportunidad. Jira habría aportado lo que a esta práctica más le faltó: el vínculo automático entre \emph{commit} e \emph{issue}, que convierte la trazabilidad hacia adelante en un subproducto del trabajo diario en lugar de un archivo CSV que hay que mantener a mano. La razón para no adoptarlo ahora es que el equipo FGMMN tiene tres entregas de artefactos ya construidos sobre convenciones propias, y migrarlas a mitad del PFC consumiría el tiempo que debe dedicarse al componente empírico. La limitación de Trello se asume con los ojos abiertos y queda documentada: sin validación automática de integridad de enlaces, el defecto D-02 puede reproducirse en el propio tablero, y por eso el CSV se contrasta manualmente contra el ERS antes de cada entrega.
+
+%======================================================================
+\section{IR tradicional frente a IR ágil}
+
+\small
+\begin{longtable}{|p{2.4cm}|p{5.2cm}|p{5.2cm}|p{2.6cm}|}
+\hline
+\thead{Dimensión} & \thead{IR tradicional} & \thead{IR ágil} & \thead{Contexto favorable} \\ \hline
+\endfirsthead
+\hline
+\thead{Dimensión} & \thead{IR tradicional} & \thead{IR ágil} & \thead{Contexto favorable} \\ \hline
+\endhead
+Documentación & ERS completo, versionado y firmado como base contractual; alta inversión inicial y alto coste de mantenimiento & \emph{Product backlog} vivo; la conversación sustituye al documento y la especificación detallada se difiere al momento de implementar & Tradicional cuando el documento es exigible por un tercero (auditoría, contrato, regulación) \\ \hline
+Gestión del cambio & Formal: RFC, análisis de impacto y decisión de un CCB. Lenta pero trazable y con responsabilidad asignada & Continua: el cambio se absorbe reordenando el \emph{backlog}, sin autorización formal & Tradicional cuando el cambio tiene coste contractual; ágil cuando el coste de cambiar es bajo \\ \hline
+Participación de \emph{stakeholders} & Concentrada en fases de elicitación y validación; el usuario aparece al principio y al final & Continua: el representante del cliente participa en cada iteración y en la revisión & Ágil cuando el cliente está disponible; tradicional cuando el acceso es puntual y costoso \\ \hline
+Herramientas & Gestores de requisitos (DOORS, Jama, ReqView): atributos, líneas base, matrices & Gestores de \emph{backlog} (Jira, Trello, Azure Boards): tarjetas, épicas, tableros & Según cuánto pese la trazabilidad formal frente a la velocidad de flujo \\ \hline
+Velocidad & Baja hasta la primera entrega; el diseño no arranca hasta que el ERS está estable & Alta: valor entregable desde la primera iteración, con especificación incompleta & Ágil cuando el time-to-market manda; tradicional cuando el coste de un error supera al del retraso \\ \hline
+Escalabilidad & Escala bien en número de requisitos y de equipos; la trazabilidad formal sostiene la coordinación & Escala mal sin marcos adicionales (SAFe, LeSS); la trazabilidad informal se rompe al crecer & Tradicional en sistemas grandes o multiequipo; ágil en equipos pequeños y colocados \\ \hline
+\caption{IR tradicional frente a IR ágil --- seis dimensiones}
+\end{longtable}
+\normalsize
+
+\textbf{Discusión contextual.} SIGA ocupa una posición híbrida que esta práctica hizo visible. Es un proyecto pequeño, con equipo colocado y cliente accesible --- condiciones de libro para IR ágil ---, pero produce un ERS documental completo porque el entregable es evaluable por un tercero y porque el componente empírico exige un artefacto congelado y citable. El resultado es que el equipo escribió historias de usuario y criterios Gherkin \emph{encima} de un catálogo de requisitos documental, y ahí apareció el defecto D-10: las 17 historias se generaron mecánicamente a partir de las fichas de RF, repitiendo la descripción del requisito en la cláusula de beneficio. Una historia derivada por concatenación de un requisito ya escrito no aporta la conversación que Cohn le atribuye \cite{cohn2004}; es la misma información con otra sintaxis, y su criterio de aceptación hereda el procedimiento de prueba del requisito en lugar de expresar un resultado observable \cite{smart2014}.
+
+La lección no es que el enfoque híbrido esté mal, sino que \emph{el orden importa}. Si la historia se escribe primero, desde la conversación con el \emph{stakeholder}, y el requisito documental se deriva de ella, ambos artefactos aportan. Si se escribe después, por conversión mecánica, se paga el coste de mantener dos formatos sin obtener el beneficio de ninguno.
+
+%======================================================================
+\section{Conclusiones críticas}
+
+\textbf{1. La consistencia, y no la ambigüedad, es el modo de fallo dominante de un ERS construido por acumulación de entregas.} El 34,5\,\% de los defectos son de consistencia y solo el 6,9\,\% de ambigüedad. Los 25 requisitos funcionales de SIGA están redactados con precisión: todos cuantifican su criterio de verificación y ninguno usa términos de grado sin umbral. Y sin embargo el documento declara dos alcances distintos del MVP (D-06), marca «Pendiente» en su cronograma lo que su cuerpo presenta como hecho (D-07) e identifica de tres maneras al participante que originó nueve requisitos (D-19). La técnica de revisión que la mayoría de los equipos aplica --- leer requisito a requisito buscando frases vagas --- es ciega a este modo de fallo. Detectarlo exige leer \emph{entre} secciones, que es justamente lo que la paráfrasis por secciones del Lector fuerza a hacer.
+
+\textbf{2. Los defectos más caros de un ERS están en la costura con sus artefactos externos, y el rendimiento de la inspección lo confirma numéricamente.} El pase más productivo por página (0,37 def./pág., casi el doble que el pase I1) fue el que contrastó el ERS contra el \texttt{CHANGELOG.md}, el \texttt{README} del MVP y el árbol de directorios del repositorio, en lugar de contrastarlo solo consigo mismo. Los defectos D-02, D-17 y D-06 --- una matriz que cita 18 identificadores inexistentes, un directorio de evidencia vacío y una cobertura de MVP contradictoria --- son invisibles leyendo el PDF, y los tres se encuentran en minutos abriendo los archivos que el documento cita. Una inspección de ERS que no salga del ERS deja fuera su zona más densa en defectos.
+
+\textbf{3. La trazabilidad se rompe en el enlace hacia adelante, y el catálogo de evidencias registra el momento exacto de la ruptura.} Gotel y Finkelstein distinguen \emph{pre-} y \emph{post-traceability} \cite{gotel1994}; SIGA cumple la primera con rigor --- cada RF declara su \texttt{EV-nn} y su \texttt{RC-nn} --- y falla la segunda de forma sistemática. El catálogo B.1 registra ocho necesidades de la segunda ronda de campo marcadas literalmente como «candidato», ninguna formalizada como requisito (D-15). El equipo capturó el origen y nunca cerró el destino. Esto sugiere una asimetría de esfuerzo que probablemente sea general: el enlace hacia atrás se crea en el momento en que la información existe y cuesta poco; el enlace hacia adelante exige volver sobre lo ya escrito, y por eso se aplaza. La herramienta CASE no lo resuelve por sí sola --- Trello permite dejar un campo vacío igual que un CSV ---, lo que sí lo resolvería es una \emph{Definition of Done} de la elicitación que exija cerrar el destino antes de cerrar la evidencia.
+
+\textbf{4. El análisis de impacto derivado de la matriz encuentra lo que el enunciado de la RFC no contiene, y ese es todo su valor.} La RFC-02 se abrió para cuantificar un umbral de aviso. Al recorrer las filas de la matriz aparecieron dos impactos que nadie había formulado: que RF-13 y RF-16 no deben ejecutar apagado automático con datos de ocupación obsoletos --- sin esa guarda, un aula ocupada cuyo gateway ha caído se queda a oscuras porque el sistema la cree vacía ---, y que el umbral de 60 s de NFR-01 es inalcanzable en un aula sin red. Ambos son riesgos funcionales reales que ninguna estimación «a ojo» habría producido, porque solo emergen al seguir enlaces de segundo orden. La matriz de trazabilidad no sirve para documentar decisiones ya tomadas: sirve para descubrir las consecuencias de las que se están tomando.
+
+\textbf{5. La ventaja formal del método Fagan es el mecanismo que impide corregir durante la detección, y su coste se paga cuando el equipo no puede cubrir los cuatro roles.} El acta registra dos interrupciones de la Moderadora ante intentos de proponer solución; en ambos casos el defecto quedó registrado en segundos y la discusión de diseño ocupó después su lugar propio, donde produjo RF-26 y RF-31. Separar detección de corrección no es formalismo: es lo que impide que la búsqueda se sesgue hacia lo que ya se sabe arreglar. Ahora bien, esta inspección no cumplió el requisito de cuatro personas independientes, y conviene ser explícito sobre lo que eso cuesta. Se mitigó con alcances disjuntos y sesiones separadas, y aun así los pases I1 e I2 comparten inevitablemente los sesgos de un mismo lector: los 29 defectos son de coherencia documental verificable, y no hay ni uno solo que cuestione si los requisitos de SIGA responden a lo que la Facultad realmente necesita. Un inspector con perfil de Infraestructura o de TI habría aportado esa clase de hallazgo, y su ausencia es una limitación real de este trabajo, no una formalidad administrativa.
+
+%======================================================================
+\section{Distribución del trabajo}
+
+\begin{center}
+\small
+\begin{tabular}{|p{5.0cm}|p{4.6cm}|p{4.6cm}|}
+\hline
+\thead{Actividad} & \thead{Muñoz Yeranick} & \thead{Chavarria Tahiny} \\ \hline
+Roles de la inspección & Moderadora + pase de revisión & Lectora + Inspectora 1 + Inspectora 2 \\ \hline
+Roles del CCB & Presidenta + Analista & Rep.\ del cliente + Desarrolladora \\ \hline
+Preparación individual & 2,0 h (19 pág., 7 defectos) & 5,0 h (103 pág., 22 defectos) \\ \hline
+Defectos aportados & 7 (24,1\,\%) & 22 (75,9\,\%) \\ \hline
+Artefactos redactados & Anexo B, acta de inspección, RFC-01, RFC-03, acta del CCB, delta v1.1, CHANGELOG & Anexos A (I1 e I2), métricas, correcciones, RFC-02, matriz, backlog, informe \\ \hline
+\emph{Commits} de autoría & 8 de 14 & 6 de 14 \\ \hline
+Horas totales & 11,5 h & 13,0 h \\ \hline
+\end{tabular}
+\end{center}
+
+El reparto es desigual por diseño y no por desequilibrio de dedicación: la Moderadora concentra los artefactos de consolidación y decisión (Anexo B, actas, RFC de gestión) y la Inspectora concentra los de detección y construcción (Anexos A, métricas, matriz, informe). La diferencia en número de defectos aportados refleja que la Inspectora cubrió 103 de las 122 páginas frente a las 19 de la Moderadora; medido por rendimiento, la Moderadora obtuvo la tasa más alta (0,37 def./pág.). La distribución es contrastable con \texttt{git shortlog -sne}.
+
+\textbf{Limitación declarada.} Con dos integrantes no se cumplen los cuatro roles independientes que exige el criterio A3 ni las cuatro perspectivas del CCB. La desviación se ejecutó por autorización docente, se mitigó con alcances disjuntos y sesiones separadas, y se declara en el acta de inspección, en los tres Anexos A, en el acta del CCB, en \S3.1 y en la quinta conclusión de \S11.
+
+%======================================================================
+\newpage
+\section{Referencias}
+\bibliographystyle{ieeetr}
+\bibliography{referencias}
+
+%======================================================================
+\newpage
+\section{Anexos}
+
+\begin{center}
+\small
+\begin{tabular}{|p{1.3cm}|p{5.6cm}|p{7.6cm}|}
+\hline
+\thead{Anexo} & \thead{Contenido} & \thead{Ubicación en el repositorio} \\ \hline
+A & Listas de verificación de inspección, una por inspector, firmadas y fechadas (6 propiedades de ISO/IEC/IEEE 29148:2018) & \texttt{02\_Inspeccion/AnexoA\_checklists/} --- tres archivos: pase I1, pase I2 y pase de la Moderadora \\ \hline
+B & Registro consolidado de defectos: 29 filas con sección, descripción, tipo, severidad, requisito afectado, inspector y corrección & \texttt{02\_Inspeccion/AnexoB\_registro\_defectos.csv} \\ \hline
+C & Formularios RFC (tres instancias completas) y acta del CCB firmada & \texttt{03\_CCB/RFC-01.md}, \texttt{RFC-02.md}, \texttt{RFC-03.md}, \texttt{Acta\_CCB.md} \\ \hline
+D & Exportación del \emph{backlog} de la herramienta CASE (6 épicas, 24 historias, 14 sub-tareas) y matriz de trazabilidad de 58 filas & \texttt{04\_Trazabilidad/backlog\_export.csv}, \texttt{matriz\_trazabilidad.csv} \\ \hline
+E & Capturas del tablero CASE y del repositorio Git & \texttt{04\_Trazabilidad/capturas/}, \texttt{06\_Evidencias/capturas\_git/} --- con la especificación exacta de cada captura requerida \\ \hline
+F & Referencias IEEE y declaración de uso de IA generativa, con herramienta, versión, tareas asistidas, fragmentos afectados y verificación crítica realizada & \S13 de este informe y \texttt{06\_Evidencias/declaracion\_IA.md} \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{6mm}
+\textbf{Artefactos complementarios:} \texttt{02\_Inspeccion/Acta\_Reunion\_Inspeccion.md} (acta de la reunión de inspección), \texttt{02\_Inspeccion/metricas.csv} (las cinco métricas con su interpretación), \texttt{02\_Inspeccion/correcciones\_aplicadas.csv} (las 23 correcciones con texto antes y después), \texttt{02\_Inspeccion/registro\_horas\_preparacion.csv} (registro de esfuerzo), \texttt{01\_ERS/ERS\_SIGA\_v1.1\_delta.tex} (bloques \LaTeX{} corregidos con la línea del fuente que reemplazan) y \texttt{04\_Trazabilidad/tablero\_definicion.md} (definición del tablero CASE).
+
+\end{document}
