@@ -107,13 +107,13 @@ Las tres pasadas de `pdflatex` son necesarias: la primera genera los auxiliares,
 
 ## Pendientes antes de la entrega al SGA
 
-- [ ] **Crear el repositorio remoto público** y actualizar la URL en `05_Informe/PE4_U4_MUNOZ_CHAVARRIA.tex` (macro `\repourl`, línea única) y en este README. Criterio de piso **G1**: si la URL está rota o el repositorio no es público, la calificación es CERO.
-- [ ] `git push -u origin main` y `git push origin baseline-v1.1`; verificar que el *tag* aparece en la pestaña *Tags* de GitHub.
+- [x] Crear el repositorio remoto público y publicarlo: https://github.com/ymunozq/ISR401-PFC-ERS-EquipoH — `main` y el *tag* `baseline-v1.1` ya están en GitHub.
+- [ ] **Recompilar `PE4_U4_MUNOZ_CHAVARRIA.pdf`** — el `.tex` se corrigió después de generar el PDF actual (conteo de *commits* en la sección de línea base); el PDF del repositorio está desactualizado en ese detalle hasta la próxima compilación.
 - [ ] Construir el tablero en Trello a partir de `04_Trazabilidad/backlog_export.csv` y tomar las capturas listadas en `04_Trazabilidad/capturas/LEEME_CAPTURAS.md`.
-- [ ] Tomar las capturas de Git listadas en `06_Evidencias/capturas_git/LEEME_CAPTURAS_GIT.md`.
+- [ ] Tomar las capturas de Git listadas en `06_Evidencias/capturas_git/LEEME_CAPTURAS_GIT.md` (ahora con el historial ya publicado).
 - [ ] Tomar las fotografías de sesión listadas en `06_Evidencias/fotos_sesion/LEEME_FOTOS.md`.
 - [ ] Firmar los tres Anexos A, el acta de inspección, el acta del CCB y la declaración de IA.
-- [ ] Recompilar el informe tras actualizar la URL y subir `PE4_U4_MUNOZ_CHAVARRIA.pdf` al SGA.
+- [ ] Subir `PE4_U4_MUNOZ_CHAVARRIA.pdf` (recompilado) al SGA en la Semana 14.
 
 ## Referentes
 
