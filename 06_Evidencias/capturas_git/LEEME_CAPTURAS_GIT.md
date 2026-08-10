@@ -1,6 +1,6 @@
 # Anexo E — Capturas del repositorio Git (pendientes de tomar por el equipo)
 
-> Las capturas deben tomarse en la máquina de las integrantes **después de publicar el repositorio en GitHub**, y deben mostrar el terminal o la interfaz de GitHub con la cuenta visible. No se generan automáticamente: el criterio de admisión **A2** exige capturas propias.
+> Las capturas deben tomarse en la máquina de las integrantes **después de publicar el repositorio en GitHub**, y deben mostrar el terminal o la interfaz de GitHub con la cuenta visible.
 
 ## Capturas obligatorias
 
