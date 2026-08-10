@@ -1,0 +1,276 @@
+% =====================================================================
+%  ERS_SIGA v1.1 - DELTA DE CORRECCIONES SOBRE LA v1.0
+%  Practica Experimental PE4 - Unidad IV - ISR-401 - Equipo H
+%
+%  Este archivo NO es un ERS completo. Contiene EXCLUSIVAMENTE los
+%  bloques de texto que sustituyen a los de ERS_SIGA_v1.0_secciones.tex
+%  como resultado de:
+%    (a) las 23 correcciones de defectos criticos y mayores acordadas en
+%        la reunion de inspeccion del 2026-08-09
+%        (02_Inspeccion/correcciones_aplicadas.csv), y
+%    (b) los cambios aprobados en las RFC-01, RFC-02 y RFC-03
+%        (03_CCB/Acta_CCB.md).
+%
+%  Cada bloque indica la linea del fuente v1.0 que reemplaza, de modo
+%  que el parche sea aplicable y auditable por un tercero.
+%  El ERS v1.1 consolidado se integra en el repositorio del PFC
+%  (gsanchezc6-beep/SIGA_FGMMN_ISR401_AVANCE_2A), del que la
+%  Moderadora del Equipo H es integrante.
+% =====================================================================
+
+% ---------------------------------------------------------------------
+% [D-17] Reemplaza la fila 2 del Registro de correcciones 1B -> 2A (L37)
+% ---------------------------------------------------------------------
+Video EV-02 en baja resoluci\'on (478$\times$270), por debajo del m\'inimo de 720p.
+& \textbf{Pendiente.} La regrabaci\'on de EV-02 en $\geq$720p no se ha realizado a la fecha de cierre de la Entrega 2A. El directorio \texttt{02\_Evidencias/Video/} contiene la estructura de carpetas pero ning\'un archivo; los videos originales residen en la zona restringida \texttt{02\_Evidencias/00\_Restringido/}. Se compromete la regrabaci\'on o la publicaci\'on del original para la Entrega 4 (2B).
+& Observaci\'on abierta A-04 del Acta del CCB \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-21] Reemplaza el parrafo de 2.1 sobre actores excluidos (L138)
+% ---------------------------------------------------------------------
+Los t\'ecnicos de mantenimiento externos no se modelan como actores directos del sistema en esta fase, ya que no requieren autenticaci\'on ni interacci\'on directa con SIGA. Los estudiantes no son usuarios operativos de la plataforma, pero \textbf{s\'i son actores} en su condici\'on de titulares de datos personales: RF-24 y RF-25 exigen que se autentiquen para ejercer sus derechos de acceso y rectificaci\'on. Por ello la Secci\'on 2.3 incorpora la clase de usuario \emph{Titular de datos}, con acceso limitado exclusivamente a su propio perfil, su bit\'acora y las funciones RF-24, RF-25 y RF-27.
+
+% ---------------------------------------------------------------------
+% [D-21] Fila nueva en la tabla de clases de usuario de 2.3 (tras L175)
+% ---------------------------------------------------------------------
+Titular de datos (Docente, Estudiante o Personal) & Persona natural cuyos datos personales trata el sistema, con independencia de que opere o no la plataforma. & Consultar su propio perfil y su propia bit\'acora, solicitar la exportaci\'on de sus datos (RF-24), solicitar la rectificaci\'on de un dato inexacto (RF-25) y recibir la notificaci\'on de una vulneraci\'on que le afecte (RF-27). & Restringido a datos propios \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-23 / RFC-01] Reemplaza la estrategia de la fila 6 de 2.4.2 (L242)
+% ---------------------------------------------------------------------
+Integrar el horario acad\'emico vigente (RD-13, RF-15), permitir excepciones autorizadas mediante \textbf{RF-31} y registrar toda excepci\'on en la bit\'acora (RF-23). Ninguna parte de esta estrategia queda sin requisito destino.
+
+% ---------------------------------------------------------------------
+% [D-04 / RFC-02] Reemplaza SUP-01 (L316) y DEP-01 (L336)
+% ---------------------------------------------------------------------
+SUP-01 & Conectividad acotada a las aulas piloto & \textbf{No} se asume conectividad estable en el conjunto de las aulas. La evidencia EV-15 (DOC-03) establece que la mayor\'ia de las aulas de la Facultad carece hoy de conexi\'on a internet. Se asume \'unicamente que las aulas piloto seleccionadas conforme a RD-08 recibir\'an conectividad antes del despliegue; dicha habilitaci\'on se registra como \emph{precondici\'on de despliegue} y no como suposici\'on del entorno. El escenario de ausencia de conectividad se gestiona funcionalmente mediante NFR-16 y se registra como riesgo RG-01. \\ \hline
+
+DEP-01 & Red institucional (dependencia cr\'itica) & El sistema depende de la disponibilidad de la red institucional en cada aula monitorizada. Se clasifica como \textbf{dependencia cr\'itica con plan de contingencia declarado}: ante su ausencia, el sistema opera en modo degradado conforme a NFR-16, avisando expl\'icitamente al usuario y absteni\'endose de ejecutar reglas autom\'aticas de apagado sobre datos de ocupaci\'on obsoletos. \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-04 / RFC-02] Riesgo nuevo RG-01 (subseccion nueva 2.6.3)
+% ---------------------------------------------------------------------
+RG-01 & Ausencia de conectividad en aulas no piloto & Alta probabilidad, impacto alto: sin red no hay lecturas, ni alertas, ni automatizaci\'on. Evidencia: EV-15 (DOC-03). Mitigaci\'on funcional obligatoria: NFR-16 (aviso expl\'icito de falta de conectividad en $\leq$30 s y sello de antig\"uedad en todo dato mostrado) y guarda de inhibici\'on del apagado autom\'atico con datos obsoletos en RF-13 y RF-16. \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-22] Reemplaza el parrafo introductorio de 3.2 (L498)
+% ---------------------------------------------------------------------
+Se presentan 31 Requisitos Funcionales (RF-01 a RF-31). Los 23 primeros se formalizaron a partir de los requisitos crudos RC-01 a RC-25 elicitados en las entrevistas EV-01 y EV-02 (Entrega 1B), con correspondencia 1:1 hasta RF-21/RC-21; \textbf{RF-22 deriva de RC-24 y RF-23 de RC-25}. \textbf{RC-22} (control de iluminaci\'on por aula) y \textbf{RC-23} (alertas por SMS al personal t\'ecnico) no se formalizaron como RF en esta entrega: se difieren a la categor\'ia \emph{Could} (RF-26C y RF-28C de la Secci\'on 5.2.3) por depender de hardware no presupuestado. Ning\'un requisito crudo elicitado queda sin destino declarado. RF-24 y RF-25 derivan del an\'alisis normativo de la LOPDP (Secci\'on 3.4) y, conforme a la RFC-03, pasan a prioridad \emph{Must} por tratarse de derechos de ejercicio obligatorio del titular. RF-26 a RF-31 son requisitos nuevos de la versi\'on 1.1, originados en la inspecci\'on formal del ERS v1.0 y en las tres solicitudes de cambio aprobadas por el CCB.
+
+% ---------------------------------------------------------------------
+% [D-03] Postcondiciones nuevas de RF-06 (sustituyen la fila de
+% Precondicion/Postcondicion de RF-06, L584)
+% ---------------------------------------------------------------------
+Precondici\'on / Postcondici\'on & C\'amara operativa, autorizada y accesible en la red institucional; permiso expl\'icito de consulta de c\'amaras en el rol del usuario. / (a) Flujo disponible en el panel sin reemplazar el sistema de videovigilancia existente; (b) \textbf{el sistema no persiste video ni fotogramas en ning\'un almacenamiento propio}; (c) \textbf{el sistema no ejecuta reconocimiento facial ni ninguna identificaci\'on un\'ivoca de personas}; (d) el acceso queda registrado en la bit\'acora (RF-23). \\ \hline
+Criterio de verificaci\'on & El sistema visualiza un flujo de prueba con latencia $\leq$3 s; una auditor\'ia del almacenamiento tras 24 h de operaci\'on no encuentra video ni fotogramas persistidos; una revisi\'on del c\'odigo confirma la ausencia de cualquier rutina de reconocimiento facial. \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-12] Reemplaza descripcion y criterio de RF-13 (L686, L691)
+% ---------------------------------------------------------------------
+Descripci\'on & \textbf{Apagado por desperdicio energ\'etico en horario activo.} El sistema debe apagar un equipo individual (proyector o climatizaci\'on) que permanezca encendido en un aula detectada como desocupada \textbf{dentro} del horario acad\'emico, tras 15 minutos continuos de desocupaci\'on. \\ \hline
+Criterio de verificaci\'on & Aula desocupada durante 15 minutos continuos dentro de horario activa el apagado del equipo en $\leq$2 minutos desde el cumplimiento del umbral, salvo que exista una excepci\'on vigente (RF-31) o que el dato de ocupaci\'on est\'e obsoleto conforme a NFR-16. \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-12] Reemplaza descripcion y criterio de RF-16 (L731, L736)
+% ---------------------------------------------------------------------
+Descripci\'on & \textbf{Apagado total post-horario.} El sistema debe apagar la totalidad de los equipos compatibles de un aula al finalizar el horario acad\'emico, una vez los sensores confirmen que el aula est\'a vac\'ia. \\ \hline
+Criterio de verificaci\'on & Apagado total activado en $\leq$2 minutos tras la confirmaci\'on de aula vac\'ia posterior al fin del horario, salvo excepci\'on vigente (RF-31) o dato de ocupaci\'on obsoleto (NFR-16). \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-14 / RFC-03] Reemplaza prioridad y plazo de RF-24 (L854-L855)
+% ---------------------------------------------------------------------
+Precondici\'on / Postcondici\'on & Usuario autenticado en su condici\'on de titular de datos. / Archivo generado y disponible para descarga en $\leq$15 d\'ias (plazo del Art. 13 de la LOPDP; \textbf{d\'ias naturales, no h\'abiles}). \\ \hline
+Prioridad (MoSCoW) & \textbf{Must} --- derecho de ejercicio obligatorio del titular; su ausencia impide el despliegue legal del sistema (RFC-03). \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-14 / RFC-03] Reemplaza prioridad y plazo de RF-25 (L869-L870)
+% ---------------------------------------------------------------------
+Precondici\'on / Postcondici\'on & Usuario autenticado y dato identificado como propio. / Cambio reflejado y auditado en $\leq$15 d\'ias (plazo del Art. 14 de la LOPDP; \textbf{d\'ias naturales, no h\'abiles}). \\ \hline
+Prioridad (MoSCoW) & \textbf{Must} --- derecho de ejercicio obligatorio del titular (RFC-03). \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-11] RF-26 nuevo - Escalado de alertas criticas no atendidas
+% ---------------------------------------------------------------------
+\begingroup
+\small
+\begin{longtable}{|p{7.8cm}|p{7.8cm}|}
+\hline
+RF-26 - Escalado autom\'atico de alertas cr\'iticas no atendidas & RF-26 - Escalado autom\'atico de alertas cr\'iticas no atendidas \\ \hline
+Descripci\'on & El sistema debe escalar autom\'aticamente al superior jer\'arquico configurado toda alerta de severidad cr\'itica que permanezca en estado \emph{Notificada} sin registro de atenci\'on durante m\'as de 30 minutos. \\ \hline
+Actor / Origen & Autoridades de la Facultad; Personal de Infraestructura y Mantenimiento. Origen: defecto D-11 de la inspecci\'on formal del ERS v1.0 (el diagrama de estados de la entidad \emph{Alerta} defin\'ia la transici\'on \emph{Escalada} sin requisito que la especificara). \\ \hline
+Entradas / Salidas & Entrada: alerta cr\'itica en estado Notificada, marca de tiempo de notificaci\'on, configuraci\'on de escalado por aula. Salida: alerta en estado Escalada + notificaci\'on al superior + registro en bit\'acora. \\ \hline
+Precondici\'on / Postcondici\'on & Alerta de severidad cr\'itica notificada y sin acci\'on de atenci\'on registrada; superior jer\'arquico configurado para el aula. / Alerta en estado Escalada, notificaci\'on emitida y evento auditado. \\ \hline
+Prioridad (MoSCoW) & Must \\ \hline
+Criterio de verificaci\'on & Alerta cr\'itica simulada sin atenci\'on durante 30 minutos pasa a estado Escalada y genera notificaci\'on al superior en $\leq$60 s; una alerta atendida antes del umbral no se escala (NFR-17). \\ \hline
+\caption{RF-26 - Escalado autom\'atico de alertas cr\'iticas no atendidas}
+\end{longtable}
+\endgroup
+
+% ---------------------------------------------------------------------
+% [D-13 / RFC-03] RF-27 nuevo - Notificacion de vulneraciones
+% ---------------------------------------------------------------------
+\begingroup
+\small
+\begin{longtable}{|p{7.8cm}|p{7.8cm}|}
+\hline
+RF-27 - Notificaci\'on de vulneraciones de seguridad (LOPDP Art. 43 y 46) & RF-27 - Notificaci\'on de vulneraciones de seguridad (LOPDP Art. 43 y 46) \\ \hline
+Descripci\'on & Ante un incidente marcado como vulneraci\'on confirmada por el responsable de protecci\'on de datos, el sistema debe generar el expediente de la brecha y emitir la notificaci\'on a la Autoridad de Protecci\'on de Datos dentro de los 5 d\'ias y a cada titular afectado dentro de los 3 d\'ias, ambos plazos contados desde la detecci\'on. \\ \hline
+Actor / Origen & Responsable de protecci\'on de datos; Personal de TI. Origen: an\'alisis normativo LOPDP Art. 43 y Art. 46; defecto D-13 de la inspecci\'on (la obligaci\'on estaba identificada en la tabla legal y mapeada a NFR-12, que solo genera una alerta interna). \\ \hline
+Entradas / Salidas & Entrada: incidente confirmado, categor\'ias de datos afectados, titulares afectados, medidas adoptadas. Salida: expediente de la brecha exportable + notificaci\'on a la Autoridad + notificaci\'on individual a cada titular + registro en bit\'acora. \\ \hline
+Precondici\'on / Postcondici\'on & Incidente de seguridad marcado como \emph{vulneraci\'on confirmada} por un usuario con rol de responsable de protecci\'on de datos. / Expediente generado, notificaciones emitidas dentro de plazo y trazabilidad completa disponible como prueba de cumplimiento. \\ \hline
+Prioridad (MoSCoW) & Must \\ \hline
+Criterio de verificaci\'on & Incidente de prueba confirmado genera expediente con los cuatro campos m\'inimos; la notificaci\'on a la Autoridad se registra dentro de los 5 d\'ias y la de cada titular dentro de los 3 d\'ias desde la marca de detecci\'on (NFR-18). \\ \hline
+\caption{RF-27 - Notificaci\'on de vulneraciones de seguridad}
+\end{longtable}
+\endgroup
+
+% ---------------------------------------------------------------------
+% [D-23 / RFC-01] RF-31 nuevo - Excepcion autorizada de apagado
+% ---------------------------------------------------------------------
+\begingroup
+\small
+\begin{longtable}{|p{7.8cm}|p{7.8cm}|}
+\hline
+RF-31 - Excepci\'on autorizada de apagado autom\'atico & RF-31 - Excepci\'on autorizada de apagado autom\'atico \\ \hline
+Descripci\'on & Un usuario con rol Docente o Personal de Infraestructura debe poder registrar una excepci\'on vigente sobre un aula y un rango horario determinados. Mientras la excepci\'on est\'e vigente, el sistema inhibe la ejecuci\'on de RF-13, RF-15 y RF-16 sobre esa aula. \\ \hline
+Actor / Origen & Docente; Personal de Infraestructura y Mantenimiento. Origen: conflicto ``Automatizaci\'on de apagado frente a continuidad acad\'emica'' de la Secci\'on 2.4.2, cuya estrategia comprometida carec\'ia de requisito destino (defecto D-23); tramitado como RFC-01 y aprobado con condiciones por el CCB del 2026-08-09. \\ \hline
+Entradas / Salidas & Entrada: aula\_id, rango horario (inicio y fin), motivo obligatorio, usuario autenticado con permiso. Salida: excepci\'on registrada, indicador visible en el panel (RF-07), entrada en bit\'acora (RF-23) y notificaci\'on al responsable del aula. \\ \hline
+Precondici\'on / Postcondici\'on & Usuario autenticado con permiso ``registrar excepci\'on'' (RF-19); rango solicitado no superior a 4 horas. / Reglas de apagado inhibidas sobre el aula durante el rango; caducidad autom\'atica al t\'ermino; evento auditado. \\ \hline
+Prioridad (MoSCoW) & Must \\ \hline
+Criterio de verificaci\'on & Con una excepci\'on vigente y el aula detectada como desocupada fuera de horario, el sistema \textbf{no} ejecuta el apagado y registra el intento inhibido; al caducar la excepci\'on, el apagado se ejecuta en $\leq$2 min; una solicitud de m\'as de 4 horas o sin motivo es rechazada; un usuario sin el permiso recibe acceso denegado. \\ \hline
+\caption{RF-31 - Excepci\'on autorizada de apagado autom\'atico}
+\end{longtable}
+\endgroup
+
+% ---------------------------------------------------------------------
+% [D-04 / RFC-02] Reemplaza la fila NFR-16 de la Tabla de RNF (L903)
+% ---------------------------------------------------------------------
+NFR-16 & \textbf{Disponibilidad en modo degradado sin conectividad.} Cuando un aula no reciba lecturas durante m\'as de 30 segundos, el sistema debe mostrar un aviso expl\'icito de falta de conectividad en $\leq$30 s desde la \'ultima lectura recibida, sellar todo dato mostrado con su antig\"uedad en minutos e inhibir la ejecuci\'on de reglas autom\'aticas de apagado sobre datos de ocupaci\'on obsoletos. & Fiabilidad & Prueba de desconexi\'on total de red en un aula piloto: se mide el tiempo hasta el aviso, se verifica el sello de antig\"uedad y se comprueba que no se ejecuta apagado autom\'atico. & \textbf{Sustentado en evidencia de campo} --- DOC-03 (EV-15). Prioridad elevada a \textbf{Must} y umbral cuantificado en 30 s por la RFC-02 del CCB del 2026-08-09. \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-11] NFR-17 nuevo - Umbral de escalado de alertas
+% ---------------------------------------------------------------------
+NFR-17 & \textbf{Fiabilidad --- umbral de escalado.} Una alerta de severidad cr\'itica en estado \emph{Notificada} sin registro de atenci\'on durante m\'as de 30 minutos debe escalarse autom\'aticamente al superior jer\'arquico configurado (soporta RF-26). & Fiabilidad & Simulaci\'on de alerta cr\'itica sin atenci\'on: se mide el tiempo hasta el cambio a estado Escalada y hasta la notificaci\'on al superior. & Nuevo en v1.1. Origen: defecto D-11 de la inspecci\'on. Sustituye a la referencia err\'onea a NFR-01 del diagrama de estados de \emph{Alerta}. \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-13 / RFC-03] NFR-18 nuevo - Plazos de notificacion de brechas
+% ---------------------------------------------------------------------
+NFR-18 & \textbf{Cumplimiento --- plazos de notificaci\'on de brechas.} Desde la marca de detecci\'on de una vulneraci\'on confirmada, la notificaci\'on a la Autoridad de Protecci\'on de Datos debe emitirse en $\leq$5 d\'ias y la notificaci\'on a cada titular afectado en $\leq$3 d\'ias (soporta RF-27). & Seguridad & Incidente de prueba con marca de detecci\'on conocida: se mide el tiempo hasta cada notificaci\'on emitida y se verifica su registro en bit\'acora. & Nuevo en v1.1. Fundamentado normativamente (LOPDP Art. 43 y Art. 46). Origen: defecto D-13. \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-13 / RFC-03] Reemplaza la fila Art. 43 y 46 de la tabla legal (L939)
+% ---------------------------------------------------------------------
+Notificaci\'on de vulneraciones de seguridad (Art. 43, Art. 46) & Deber de notificar a la Autoridad de Protecci\'on de Datos dentro de 5 d\'ias (Art. 43) y al titular dentro de 3 d\'ias (Art. 46) ante brechas de seguridad detectadas. & \textbf{RF-27, NFR-18} & Generaci\'on del expediente de la brecha y emisi\'on de las notificaciones dentro de plazo, con registro probatorio en la bit\'acora (RF-23). NFR-12 (alerta interna al administrador en $\leq$5 min) es un mecanismo de \emph{detecci\'on} y no de \emph{notificaci\'on}; no cumple por s\'i solo estos art\'iculos. \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-03] Reemplaza la fila Art. 4 y Art. 26 de la tabla legal (L941)
+% ---------------------------------------------------------------------
+Imagen como dato personal / dato biom\'etrico (Art. 4, Art. 26) & La imagen que identifica a una persona es dato personal; el Art. 4 define dato biom\'etrico como aquel que permite o confirma la identificaci\'on \'unica de una persona natural. & RD-05, RF-06 & La ocupaci\'on de las aulas se determina \textbf{exclusivamente mediante sensores de presencia (RF-03)}; SIGA no procesa imagen para inferirla. La \'unica funci\'on que involucra video es RF-06, cuyas postcondiciones (b) y (c) establecen de forma verificable que el sistema no persiste video ni fotogramas y no ejecuta reconocimiento facial ni identificaci\'on un\'ivoca. Sobre esas dos postcondiciones, y no sobre una afirmaci\'on sin requisito destino, se sustenta que la imagen que atraviesa SIGA \textbf{no constituye dato biom\'etrico} en los t\'erminos del Art. 4 y que no aplica el r\'egimen reforzado del Art. 26, lo que fundamenta la clasificaci\'on del proyecto en Categor\'ia B de riesgo \'etico. \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-10] Reemplaza HU-01 (L991-L994). Las 17 historias se reescriben
+% con este mismo patron: beneficio real en "para", evento observable
+% en "Cuando" y resultado verificable en "Entonces".
+% ---------------------------------------------------------------------
+Como Personal de Infraestructura y Mantenimiento, quiero consultar la temperatura, la humedad y la ocupaci\'on de cada aula en tiempo real, \textbf{para} detectar una condici\'on an\'omala antes de que interrumpa una clase.
+
+\textit{Escenario Gherkin --- \textbf{Dado} un aula con sensor configurado y conectado a la red, \textbf{Cuando} el sensor emite una lectura de temperatura, \textbf{Entonces} el panel muestra esa lectura con su marca de tiempo en un m\'aximo de 10 segundos y con un error no mayor a 1\,$^{\circ}$C.}
+
+% ---------------------------------------------------------------------
+% [D-10] Reemplaza HU-11 (RF-13), ejemplo del patron aplicado a una
+% historia afectada ademas por D-12 y RFC-01
+% ---------------------------------------------------------------------
+Como Personal de Infraestructura y Mantenimiento, quiero que los equipos de un aula desocupada dentro del horario se apaguen autom\'aticamente, \textbf{para} reducir el consumo el\'ectrico sin tener que recorrer las aulas ni interrumpir clases en curso.
+
+\textit{Escenario Gherkin --- \textbf{Dado} un aula dentro de horario acad\'emico, con un proyector encendido y sin excepci\'on vigente, \textbf{Cuando} el sensor de presencia reporta el aula desocupada durante 15 minutos continuos, \textbf{Entonces} el sistema env\'ia el comando de apagado en un m\'aximo de 2 minutos y registra el evento en la bit\'acora con aula, equipo y marca de tiempo.}
+
+\textit{Escenario Gherkin (excepci\'on, RF-31) --- \textbf{Dado} un aula con una excepci\'on de apagado vigente, \textbf{Cuando} se cumple la condici\'on de desocupaci\'on de 15 minutos, \textbf{Entonces} el sistema \textbf{no} env\'ia el comando de apagado y registra el intento inhibido con referencia a la excepci\'on aplicada.}
+
+% ---------------------------------------------------------------------
+% [D-11] Reemplaza la descripcion del diagrama de estados de Alerta (L1808)
+% ---------------------------------------------------------------------
+\textit{Entidad seleccionada: \textit{Alerta}, segundo ciclo de vida no trivial del dominio. Estados: Generada $\rightarrow$ Notificada $\rightarrow$ \{Atendida | Escalada\}. Transiciones: Generada $\rightarrow$ Notificada (env\'io autom\'atico al responsable, RF-08, dentro del umbral de entrega de NFR-01); Notificada $\rightarrow$ Atendida (registro de acci\'on del responsable); Notificada $\rightarrow$ Escalada (\textbf{sin registro de atenci\'on dentro del umbral de 30 minutos definido en NFR-17, ejecutado por RF-26}); Escalada $\rightarrow$ Atendida (intervenci\'on de la autoridad configurada, registrada conforme a RF-26).}
+
+% ---------------------------------------------------------------------
+% [D-08] Reemplaza el parrafo introductorio de 5.4 WSJF (L1925)
+% ---------------------------------------------------------------------
+Nuevo en esta entrega. El puntaje WSJF se calcula como (Valor de negocio + Criticidad de tiempo + Reducci\'on de riesgo) / Duraci\'on estimada. Los componentes del costo de retraso se estimaron el \textbf{2026-07-28} en una sesi\'on de equipo de 90 minutos con los cinco integrantes, sobre escala relativa de Fibonacci (1-2-3-5-8-13), y la escala fue validada por COORD-03 (EV-14). El acta de la sesi\'on y las hojas de puntuaci\'on individuales se conservan en \texttt{04\_Trazabilidad/sesion\_wsjf\_2026-07-28.csv}, de modo que la priorizaci\'on sea reproducible por un tercero.
+
+% ---------------------------------------------------------------------
+% [D-06] Reemplaza la Seccion 6.1 completa (L2009)
+% ---------------------------------------------------------------------
+El MVP cubre \textbf{11 de los 20 RF de prioridad Must (55\,\%)}: RF-01, RF-03, RF-07, RF-08, RF-10, RF-12, RF-13, RF-16, RF-19, RF-22 y RF-23, verificados contra el c\'odigo real del repositorio del MVP en el \emph{commit} \texttt{1ef2873}. El denominador pasa de 17 a 20 RF Must como consecuencia de la RFC-03, que eleva RF-24 y RF-25 a \emph{Must} e incorpora RF-27; la cobertura declarada baja en consecuencia del 64,7\,\% al 55\,\%, y se declara expresamente en lugar de mantenerse sobre un denominador desactualizado. Los requisitos Must no cubiertos por el MVP son RF-02, RF-04, RF-05, RF-11, RF-15, RF-21, RF-24, RF-25, RF-26, RF-27 y RF-31; los cinco primeros requieren hardware de control no disponible en el entorno de demostraci\'on y los seis restantes son requisitos nuevos o repriorizados de la versi\'on 1.1, planificados para la Entrega 4 (2B).
+
+% ---------------------------------------------------------------------
+% [D-18] Reemplaza la fila Poblacion del PICOC (L2052) y anade la regla
+% de emparejamiento
+% ---------------------------------------------------------------------
+Poblaci\'on & Requisitos funcionales del dominio SIGA: 26 generados por LLM y 25 elicitados por el equipo humano. Para hacer viable el dise\~no apareado, los requisitos se emparejan \textbf{por objetivo funcional equivalente}, resultando \textbf{25 pares}; el requisito generado por LLM que no tiene equivalente humano se excluye del an\'alisis apareado y se reporta por separado como hallazgo cualitativo de cobertura adicional. El emparejamiento lo realiza un tercero ciego al origen de cada requisito, antes de la evaluaci\'on, y se publica en \texttt{06\_Experimento/emparejamiento\_pares.csv}. La prueba t apareada y el $\kappa$ de Fleiss quedan por tanto definidos sobre $n=25$ pares. \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-07] Reemplaza las filas 11, 14-15 y 16 del cronograma A.3
+% ---------------------------------------------------------------------
+11 & Dise\~no experimental, registro de protocolo en OSF, elecci\'on de Enfoque 1. & Protocolo experimental registrado & \textbf{En revisi\'on institucional --- sin DOI a la fecha de cierre} \\ \hline
+14-15 & Modelado UML completo (8 tipos + i*), Kano, WSJF, MVP. & Diagramas, priorizaci\'on, MVP & \textbf{Completado} \\ \hline
+16 & An\'alisis del componente emp\'irico, dataset Zenodo. & Dataset con DOI & \textbf{Parcial --- puntuaciones de los 3 jueces disponibles en 06\_Experimento/resultados/; dataset pendiente de DOI} \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-07] Reemplaza la frase de las conclusiones sobre el componente
+% empirico (L2097)
+% ---------------------------------------------------------------------
+El componente emp\'irico cuenta con las puntuaciones reales de los tres jueces ciegos en \texttt{06\_Experimento/resultados/}; el an\'alisis estad\'istico y el $\kappa$ de Fleiss se reportan en la Entrega 4 (2B). El registro OSF se encuentra en revisi\'on institucional y no dispone de DOI a la fecha de cierre de esta entrega.
+
+% ---------------------------------------------------------------------
+% [D-19] Reemplaza la fila de entrevista semiestructurada de A.2 (L2145)
+% ---------------------------------------------------------------------
+Entrevista semiestructurada & Permite explorar en profundidad el proceso AS-IS e identificar problemas operativos reales. Dos entrevistas grabadas en video con consentimiento informado firmado. & Personal de Infraestructura y Mantenimiento (EV-01); \textbf{Coordinaci\'on de la Carrera --- COORD-01 (EV-02)}, que ejerce simult\'aneamente funciones docentes. \\ \hline
+
+% ---------------------------------------------------------------------
+% [D-01] Contenido de la Seccion A.4 (hoy vacia, L2225)
+% ---------------------------------------------------------------------
+\subsection*{A.4 Declaraci\'on de uso de Inteligencia Artificial Generativa}
+\addcontentsline{toc}{subsection}{A.4 Declaraci\'on de uso de Inteligencia Artificial Generativa}
+
+El equipo declara el uso de un modelo de lenguaje grande (Claude Sonnet 5, interfaz de chat, accesos entre el 2026-07-20 y el 2026-07-29) en tres tareas acotadas:
+
+\begin{enumerate}[label=(\arabic*)]
+\item Reescritura de estilo de los p\'arrafos de las secciones 1.1, 2.1 y VIII, sobre texto redactado previamente por el equipo.
+\item Generaci\'on del Conjunto A de requisitos funcionales del componente emp\'irico (Secci\'on VII), que constituye el \emph{objeto de estudio} del experimento y no un insumo del ERS.
+\item Traducci\'on al ingl\'es de las etiquetas de los diagramas UML e i*, conforme a lo indicado por el docente responsable.
+\end{enumerate}
+
+\textbf{No} se emple\'o inteligencia artificial generativa para redactar los requisitos del Conjunto B (Secci\'on 3.2), los criterios de verificaci\'on, la matriz de trazabilidad ni las conclusiones.
+
+\textbf{Verificaci\'on cr\'itica realizada.} Cada p\'arrafo asistido fue contrastado contra la transcripci\'on o el artefacto fuente correspondiente por el Verificador (GILCES JOS\'E) y por la Documentadora (MU\~NOZ YERANICK). Las referencias citadas se comprobaron una a una contra su DOI. Se deja constancia de que declarar el uso de IA no exime de las penalizaciones previstas en la gu\'ia.
+
+Firman los cinco integrantes del equipo FGMMN.
+
+% ---------------------------------------------------------------------
+% [D-05] Correccion transversal de referencias cruzadas
+% ---------------------------------------------------------------------
+% Se anaden \label{tab:rnf} y \label{tab:clasificacion} a las tablas
+% correspondientes y las siete menciones numericas escritas a mano se
+% sustituyen por:
+%   la Tabla~\ref{tab:rnf}            (5 ocurrencias: L880, L912, L919, L2097)
+%   la Tabla~\ref{tab:clasificacion}  (2 ocurrencias: L1825, L1874)
+% Se anade \label a las 68 tablas y a las 51 figuras del documento.
+
+% ---------------------------------------------------------------------
+% [D-16] Correccion transversal de la bibliografia
+% ---------------------------------------------------------------------
+% Se elimina \nocite{*} de la Seccion IX y se introducen citas explicitas
+% en el punto de uso:
+%   \cite{iso29148}   en 1.1 y 3.2
+%   \cite{iso25010}   en 3.3
+%   \cite{lopdp}      en 3.4
+%   \cite{chazette2020} en 1.3 y 3.3.1
+%   \cite{yu1995}     en 2.7
+%   \cite{cohn2004}   en 3.6
+%   \cite{smart2014}  en 3.6
+%   \cite{fagan1976}  en el Registro de correcciones
+% Se depuran de referencias.bib las entradas que no sustentan ninguna
+% afirmacion del documento y se verifica el DOI de las restantes.
+
+% =====================================================================
+% FIN DEL DELTA v1.0 -> v1.1
+% =====================================================================
