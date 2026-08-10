@@ -1,0 +1,59 @@
+ID,Stakeholder,ID-EV,Ley,Articulo,ID-RF,Tipo,Prioridad-MoSCoW,ID-CU,ID-HU,ID-Clase-Modulo,ID-Mockup,ID-Prueba,Estado-verificacion
+1,Personal de Infraestructura y Mantenimiento,EV-01,,,RF-01,RF,Must,CU-01;CU-03,HU-01,SensorIoT;LecturaSensor,MU-01,PR-01,Verificado en MVP
+2,Personal de Infraestructura y Mantenimiento,EV-01,,,RF-02,RF,Must,CU-02,HU-02,GatewayIoT;Equipo,MU-01,PR-02,Pendiente 2B
+3,Personal de Infraestructura y Mantenimiento,EV-01,,,RF-03,RF,Must,CU-03,HU-03,SensorIoT;Aula,MU-01,PR-03,Verificado en MVP
+4,Personal de Infraestructura y Mantenimiento;Coordinacion;Estudiantes,EV-01;EV-02;EV-03,,,RF-04,RF,Must,CU-01;CU-02,HU-04,Proyector,MU-01,PR-04,Pendiente 2B
+5,Personal de Infraestructura y Mantenimiento;Estudiantes,EV-01;EV-03,,,RF-05,RF,Must,CU-01;CU-02,HU-05,Climatizador,MU-01,PR-05,Pendiente 2B
+6,Personal de Infraestructura y Mantenimiento,EV-01;EV-07,LOPDP,Art. 4 y Art. 26,RF-06,RF,Should,CU-15,,CamaraVigilancia,,PR-06,Modificado por D-03 - dos postcondiciones nuevas
+7,Personal de Infraestructura y Mantenimiento;Coordinacion;Estudiantes,EV-01;EV-02;EV-03;EV-08;EV-09;EV-10;EV-16,,,RF-07,RF,Must,CU-01,HU-06,Aula;PanelControl,MU-01,PR-07,Verificado en MVP
+8,Personal de Infraestructura y Mantenimiento;Estudiantes,EV-01;EV-03;EV-12,,,RF-08,RF,Must,CU-04;CU-05,HU-07,Alerta,MU-02,PR-08,Verificado en MVP
+9,Coordinacion,EV-02,,,RF-09,RF,Should,CU-16,,ModuloIA;Equipo,,PR-09,Pendiente 2B
+10,Personal de Infraestructura y Mantenimiento,EV-01;EV-06,,,RF-10,RF,Must,CU-08,HU-08,SolicitudMantenimiento,MU-03,PR-10,Verificado en MVP
+11,Coordinacion;Estudiantes,EV-02;EV-03,,,RF-11,RF,Must,CU-04;CU-05,HU-09,Alerta,MU-02,PR-11,Pendiente 2B
+12,Personal de Infraestructura y Mantenimiento;Coordinacion;Estudiantes,EV-01;EV-02;EV-03;EV-11;EV-14;EV-16,,,RF-12,RF,Must,CU-06;CU-07,HU-10,SolicitudMantenimiento,MU-03,PR-12,Verificado en MVP
+13,Personal de Infraestructura y Mantenimiento,EV-01;EV-05,,,RF-13,RF,Must,CU-13,HU-11,Equipo;MotorReglas,MU-01,PR-13,Verificado en MVP - alcance delimitado por D-12
+14,Coordinacion,EV-02,,,RF-14,RF,Should,CU-16,,ConsumoEnergetico,,PR-14,Pendiente 2B
+15,Personal de Infraestructura y Mantenimiento,EV-01;EV-05;EV-10,,,RF-15,RF,Must,CU-13,HU-12,HorarioAcademico;MotorReglas,,PR-15,Pendiente 2B
+16,Personal de Infraestructura y Mantenimiento,EV-01;EV-05;EV-12,,,RF-16,RF,Must,CU-03;CU-13,HU-13,Aula;Equipo;MotorReglas,,PR-16,Verificado en MVP - alcance delimitado por D-12
+17,Coordinacion;Autoridades,EV-02;EV-13,,,RF-17,RF,Should,CU-09,,ReporteAdministrativo,MU-04,PR-17,Pendiente 2B
+18,Coordinacion;Autoridades,EV-02,,,RF-18,RF,Should,CU-10,,ReporteAdministrativo,MU-04,PR-18,Pendiente 2B
+19,Coordinacion;Personal de TI,EV-02;EV-10;EV-13,,,RF-19,RF,Must,CU-11,HU-14,Usuario;Rol,,PR-19,Verificado en MVP
+20,Coordinacion,EV-02,,,RF-20,RF,Should,CU-01;CU-08,,Aula;LecturaSensor,,PR-20,Pendiente 2B
+21,Personal de Infraestructura y Mantenimiento,EV-01;EV-05,,,RF-21,RF,Must,CU-04;CU-13,HU-15,Alerta;Equipo,MU-02,PR-21,Pendiente 2B
+22,Personal de Infraestructura y Mantenimiento,EV-01,,,RF-22,RF,Must,CU-12,HU-16,GatewayIoT,MU-01,PR-22,Verificado en MVP
+23,Personal de Infraestructura y Mantenimiento;Coordinacion,EV-01;EV-02;EV-11;EV-15,LOPDP,Art. 10 lit. k y Art. 47 num. 2,RF-23,RF,Must,CU-14,HU-17,BitacoraAccion,,PR-23,Verificado en MVP
+24,Titular de datos (Docente;Estudiante;Personal),,LOPDP,Art. 13,RF-24,RF,Must,CU-11,HU-18,Usuario,,PR-24,Repriorizado por RFC-03 - plazo corregido a 15 dias
+25,Titular de datos (Docente;Estudiante;Personal),,LOPDP,Art. 14,RF-25,RF,Must,CU-11,HU-19,Usuario,,PR-25,Repriorizado por RFC-03 - plazo corregido a 15 dias
+26,Personal de Infraestructura y Mantenimiento;Autoridades,EV-12,,,RF-26,RF,Must,CU-05,HU-20,Alerta;MotorEscalado,MU-02,PR-26,Nuevo por D-11 - escalado de alertas no atendidas
+27,Titular de datos;Personal de TI,,LOPDP,Art. 43 y Art. 46,RF-27,RF,Must,CU-17,HU-21,IncidenteSeguridad;BitacoraAccion,,PR-27,Nuevo por RFC-03 - implementacion en 2B
+28,Personal de servicios generales,EV-08,,,RF-28,RF,Could,CU-15,,CamaraVigilancia;Alerta,,PR-28,Candidato EV-08 formalizado por D-15
+29,Coordinacion,EV-14,,,RF-29,RF,Should,CU-06;CU-07,,SolicitudMantenimiento,MU-03,PR-29,Candidato EV-14 formalizado por D-15
+30,Docente,EV-15,,,RF-30,RF,Should,CU-06,,SolicitudMantenimiento,MU-03,PR-30,Candidato EV-15 formalizado por D-15
+31,Docente;Personal de Infraestructura y Mantenimiento,EV-12,,,RF-31,RF,Must,CU-13,HU-22,ExcepcionApagado;MotorReglas,MU-01,PR-31,Nuevo por RFC-01 - condicion 4h maximo
+32,Personal de Infraestructura y Mantenimiento,EV-01,,,NFR-01,NFR,Must,CU-04,,ServicioNotificaciones,,PR-32,Validado en 1B
+33,Autoridades;Personal de TI,,,,NFR-02,NFR,Must,CU-01,,Plataforma,,PR-33,Validado en 1B
+34,Personal de TI,,LOPDP,Proteccion desde el diseno,NFR-03,NFR,Must,CU-11;CU-15,,Seguridad;Usuario,,PR-34,Validado en 1B
+35,Docente;Personal Administrativo,EV-03,,,NFR-04,NFR,Should,CU-01,,PanelControl,MU-01,PR-35,Validado en 1B
+36,Docente;Estudiantes,EV-03,,,NFR-05,NFR,Should,CU-01,,Frontend,MU-01,PR-36,Validado en 1B
+37,Personal de TI,,,,NFR-06,NFR,Should,,,Plataforma,,PR-37,Validado en 1B
+38,Personal de Infraestructura y Mantenimiento,,,,NFR-07,NFR,Should,CU-03,,SensorIoT,,PR-38,No verificado - declarado en ERS
+39,Coordinacion,EV-10,,,NFR-08,NFR,Should,CU-13,,HorarioAcademico,,PR-39,Parcialmente sustentado - EV-10
+40,Personal de TI,,,,NFR-09,NFR,Could,,,Plataforma,,PR-40,No verificado - declarado en ERS
+41,Personal de Infraestructura y Mantenimiento;Personal de TI,,,,NFR-10,NFR,Must,CU-16,,ModuloIA,,PR-41,No verificado - estudio de explicabilidad pendiente
+42,Titular de datos,,LOPDP,Art. 13,NFR-11,NFR,Must,CU-11,,Usuario,,PR-42,Plazo corregido a 15 dias por RFC-03
+43,Personal de TI,,LOPDP,Art. 43 y Art. 46,NFR-12,NFR,Must,CU-11,,Seguridad,,PR-43,Alcance acotado por RFC-03
+44,Personal de Infraestructura y Mantenimiento,,,,NFR-13,NFR,Should,CU-12,,GatewayIoT,,PR-44,No verificado - declarado en ERS
+45,Personal de TI,EV-12,,,NFR-14,NFR,Should,CU-05,,Plataforma,,PR-45,Parcialmente sustentado - EV-12
+46,Docente,,,,NFR-15,NFR,Should,CU-01,,Frontend,,PR-46,No verificado - declarado en ERS
+47,Docente,EV-15,,,NFR-16,NFR,Must,CU-01;CU-12,HU-23,Aula;PanelControl,MU-01,PR-47,Cuantificado en 30 s y elevado a Must por RFC-02
+48,Personal de Infraestructura y Mantenimiento;Autoridades,EV-12,,,NFR-17,NFR,Must,CU-05,,MotorEscalado,,PR-48,Nuevo por D-11
+49,Titular de datos;Personal de TI,,LOPDP,Art. 43 y Art. 46,NFR-18,NFR,Must,CU-17,,IncidenteSeguridad,,PR-49,Nuevo por RFC-03
+50,Personal de TI,,,,RD-01;RD-02,RD,Must,CU-12,,GatewayIoT;Seguridad,,PR-50,Restriccion tecnologica vigente
+51,Coordinacion,EV-05;EV-10,,,RD-13,RD,Must,CU-13,,HorarioAcademico,,PR-51,Restriccion operativa - fuente EV-05
+52,Personal de Infraestructura y Mantenimiento,EV-07,LOPDP,Art. 4 y Art. 26,RD-05,RD,Must,CU-15,,CamaraVigilancia,,PR-52,Ampliada por D-03
+53,Personal de TI;Titular de datos,,LOPDP,Art. 7 y Art. 43,RD-09,RD,Must,CU-11;CU-17,,Seguridad;IncidenteSeguridad,,PR-53,Ampliada por RFC-03
+54,Personal de servicios generales,EV-09,,,RF-07,RF,Must,CU-01;CU-03,HU-06,Aula;PanelControl,MU-01,PR-07,Validacion de panel con personal no tecnico
+55,Docente,EV-13,,,RF-10;RF-17,RF,Must;Should,CU-08;CU-09,HU-08,ReporteAdministrativo,MU-04,PR-10;PR-17,Brecha de historial de intervenciones - diferida a 2B
+56,Estudiantes,EV-17,,,RF-05;RF-07;RF-08,RF,Must,CU-01;CU-02;CU-04,HU-05;HU-06;HU-07,Aula;Alerta;Climatizador,MU-01;MU-02,PR-05;PR-07;PR-08,Cuestionario v2.0 - insumo Kano y WSJF
+57,Personal de Infraestructura y Mantenimiento,EV-18,,,RF-01;RF-04;RF-05;RF-06,RF,Must;Should,CU-01;CU-02;CU-15,,Aula;Equipo;CamaraVigilancia,MU-01,PR-01;PR-04;PR-05;PR-06,Evidencia de contexto fisico del entorno
+58,Estudiantes,EV-19,,,RF-04;RF-05;RF-07;RF-08,RF,Must,CU-01;CU-02;CU-04;CU-05,,Aula;Alerta,MU-01;MU-02,PR-04;PR-05;PR-07;PR-08,Evidencia de aplicacion del cuestionario
